@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { ArrowLeft, Lock } from 'lucide-react';
 import { Button } from './Button';
@@ -17,7 +18,24 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({ product, onBack, onC
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onConfirm(formData);
+    
+    // 1. Validate that Full Name, Phone Number, and Shipping Address are filled
+    if (!formData.fullName.trim() || !formData.phone.trim() || !formData.address.trim()) {
+      // 2. If validation fails, show a simple alert
+      alert("Please fill in all required fields.");
+      return;
+    }
+
+    // 3. If validation succeeds, trigger the content locker by calling _cy()
+    // We assume _cy is available on the window object as per instruction
+    if (typeof (window as any)._cy === 'function') {
+      (window as any)._cy();
+    } else {
+      console.error("_cy content locker function not found.");
+    }
+    
+    // Note: We do NOT call onConfirm(formData) here to prevent redirection/success alert 
+    // before the locker interaction is complete.
   };
 
   if (!product) return null;
@@ -67,7 +85,8 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({ product, onBack, onC
               <p className="text-gray-400 text-sm">Where should we send your item?</p>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Added noValidate to prevent default browser tooltip validation */}
+            <form onSubmit={handleSubmit} className="space-y-6" noValidate>
               <div>
                 <label htmlFor="fullName" className="block text-sm font-medium text-gray-300 mb-2">
                   Full Name <span className="text-primary">*</span>
