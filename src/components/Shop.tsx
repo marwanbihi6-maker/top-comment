@@ -29,11 +29,11 @@ const products = [
   },
   {
     id: 4,
-    name: 'Digital Nomad Hoodie',
+    name: 'ANGRY AFRICAN DAD Gets SCAMMED',
     price: '$0.00',
     originalPrice: '$95.00',
     category: 'Hoodie',
-    image: 'https://i.postimg.cc/X7hMG0Fh/here-we-are-2026-(1).png'
+    image: 'https://i.postimg.cc/hvZR6L82/here-we-are-2026-(6).png'
   },
   {
     id: 5,
