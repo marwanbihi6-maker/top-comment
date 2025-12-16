@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { ShoppingBag, Heart, AlertCircle } from 'lucide-react';
 
@@ -124,8 +125,13 @@ export const Shop: React.FC = () => {
                   
                   {/* Promo Badge: Always Visible for Store-Wide Promo */}
                   <div className="absolute top-3 left-3 z-30 flex flex-col items-start gap-1">
-                    <div className={`px-3 py-1 text-[10px] sm:text-xs font-bold uppercase tracking-wider rounded-md shadow-lg ${limitReached ? 'bg-gray-700 text-gray-400' : 'bg-primary text-white animate-pulse'}`}>
-                      {limitReached ? 'Offer Ended' : '100% OFF – Limited to first 10'}
+                    <div className={`promoBadge px-2 py-1 md:px-3 text-[10px] md:text-[10px] leading-none max-w-fit font-bold uppercase tracking-wider rounded md:rounded-md shadow-lg ${limitReached ? 'bg-gray-700 text-gray-400' : 'bg-primary text-white animate-pulse'}`}>
+                      {limitReached ? 'Offer Ended' : (
+                        <>
+                          <span className="md:hidden">100% OFF · First 10</span>
+                          <span className="hidden md:inline">100% OFF – Limited to first 10</span>
+                        </>
+                      )}
                     </div>
                   </div>
 
@@ -140,20 +146,24 @@ export const Shop: React.FC = () => {
                   
                   <div className="absolute bottom-4 left-4 right-4 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 delay-75 z-20">
                     {limitReached ? (
-                      <div className="w-full py-3 bg-gray-900/95 backdrop-blur-sm text-gray-400 border border-gray-700 font-bold rounded-xl shadow-xl flex flex-col items-center justify-center gap-1 text-center px-2 cursor-not-allowed">
-                        <div className="flex items-center gap-2">
-                          <AlertCircle className="w-4 h-4" />
-                          <span>Fully Claimed</span>
+                      <div className="w-full py-2 md:py-3 bg-gray-900/95 backdrop-blur-sm text-gray-400 border border-gray-700 font-bold rounded-lg md:rounded-xl shadow-xl flex flex-col items-center justify-center gap-0.5 md:gap-1 text-center px-2 cursor-not-allowed">
+                        <div className="flex items-center gap-1.5 md:gap-2">
+                          <AlertCircle className="w-3 h-3 md:w-4 md:h-4" />
+                          <span className="text-xs md:text-base">Fully Claimed</span>
                         </div>
-                        <span className="text-[10px] font-medium opacity-75">The 100% OFF offer has ended.</span>
+                        <span className="text-[9px] md:text-[10px] font-medium opacity-75">
+                          <span className="md:hidden">Offer ended</span>
+                          <span className="hidden md:inline">The 100% OFF offer has ended.</span>
+                        </span>
                       </div>
                     ) : (
                       <button 
                         onClick={() => handleAddToCart(product)}
-                        className="w-full py-3 backdrop-blur-sm font-bold rounded-xl shadow-xl flex items-center justify-center gap-2 transition-colors bg-primary text-white hover:bg-red-600"
+                        className="promoCtaBtn w-full h-[36px] md:h-auto px-[10px] md:px-0 py-0 md:py-3 whitespace-nowrap text-center backdrop-blur-sm font-bold text-[12px] md:text-base rounded-[10px] md:rounded-xl shadow-xl flex items-center justify-center gap-1.5 md:gap-2 transition-colors bg-primary text-white hover:bg-red-600"
                       >
-                        <ShoppingBag className="w-4 h-4" />
-                        Claim 100% OFF
+                        <ShoppingBag className="w-3 h-3 md:w-4 md:h-4" />
+                        <span className="md:hidden">100% OFF</span>
+                        <span className="hidden md:inline">Claim 100% OFF</span>
                       </button>
                     )}
                   </div>
