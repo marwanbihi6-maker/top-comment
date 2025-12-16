@@ -37,11 +37,11 @@ const products = [
   },
   {
     id: 5,
-    name: 'mr penis',
+    name: 'house',
     price: '$0.00',
     originalPrice: '$42.00',
-    category: 'T-Shirt',
-    image: 'https://i.postimg.cc/2S2ZF2ks/here-we-are-2026.png'
+    category: 'Hoodie',
+    image: 'https://i.postimg.cc/FzHV13tJ/here-we-are-2026-(5).png'
   },
   {
     id: 6,
