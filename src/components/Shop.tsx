@@ -45,11 +45,11 @@ const products = [
   },
   {
     id: 6,
-    name: 'Urban Tech Hoodie',
+    name: 'JESUS IS KING',
     price: '$0.00',
     originalPrice: '$88.00',
     category: 'Hoodie',
-    image: 'https://i.postimg.cc/0ywLWLY3/here-we-are-2026-(2).png'
+    image: 'https://i.postimg.cc/GtMwsFHg/here-we-are-2026-(4).png'
   }
 ];
 
