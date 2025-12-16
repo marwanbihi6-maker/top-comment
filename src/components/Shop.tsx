@@ -53,7 +53,11 @@ const products = [
   }
 ];
 
-export const Shop: React.FC = () => {
+interface ShopProps {
+  onClaimProduct?: (product: any) => void;
+}
+
+export const Shop: React.FC<ShopProps> = ({ onClaimProduct }) => {
   // State to simulate backend order tracking for the limited offer
   const [promoClaimedCount, setPromoClaimedCount] = useState(0);
   const PROMO_LIMIT = 10;
@@ -70,13 +74,9 @@ export const Shop: React.FC = () => {
   const handleAddToCart = (product: any) => {
     // Global limit check
     if (promoClaimedCount < PROMO_LIMIT) {
-      // Increment claim count
-      const newCount = promoClaimedCount + 1;
-      setPromoClaimedCount(newCount);
-      localStorage.setItem('getmyidea_promo_claims', newCount.toString());
-      
-      // Visual feedback
-      alert(`🎉 Success! You secured the limited free drop for ${product.name}.`);
+      if (onClaimProduct) {
+        onClaimProduct(product);
+      }
     } else {
       // Fallback if somehow clicked after limit
       alert("Sorry, this offer has just ended.");
