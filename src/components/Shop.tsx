@@ -50,6 +50,14 @@ const products = [
     originalPrice: '$88.00',
     category: 'Hoodie',
     image: 'https://i.postimg.cc/GtMwsFHg/here-we-are-2026-(4).png'
+  },
+  {
+    id: 7,
+    name: 'Jane Doe',
+    price: '$0.00',
+    originalPrice: '$85.00',
+    category: 'HOODIE',
+    image: 'https://i.postimg.cc/hjmz4PyC/here-we-are-2026-(8).png'
   }
 ];
 
