@@ -66,6 +66,14 @@ const products = [
     originalPrice: '$85.00',
     category: 'HOODIE',
     image: 'https://i.postimg.cc/JhjL8s8S/here-we-are-2026-(9).png'
+  },
+  {
+    id: 9,
+    name: 'Office Dancing Zone',
+    price: '$0.00',
+    originalPrice: '$85.00',
+    category: 'HOODIE',
+    image: 'https://i.postimg.cc/MpvB9SwG/here-we-are-2026-(11).png'
   }
 ];
 
