@@ -58,6 +58,14 @@ const products = [
     originalPrice: '$85.00',
     category: 'HOODIE',
     image: 'https://i.postimg.cc/hjmz4PyC/here-we-are-2026-(8).png'
+  },
+  {
+    id: 8,
+    name: 'Miyabi head scratches',
+    price: '$0.00',
+    originalPrice: '$85.00',
+    category: 'HOODIE',
+    image: 'https://i.postimg.cc/JhjL8s8S/here-we-are-2026-(9).png'
   }
 ];
 
