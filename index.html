@@ -14,8 +14,12 @@
               sans: ['Inter', 'sans-serif'],
             },
             colors: {
-              primary: '#FF4D6D', // A vibrant pink/red for CTA based on reference
-              secondary: '#6419E6', // Purple to match background vibes
+              primary: '#FF3F8E', // BullAirs inspired Pink
+              brandPurple: '#8B5CF6', // BullAirs inspired Purple
+              secondary: '#6419E6', 
+            },
+            borderRadius: {
+              'xl-card': '18px',
             }
           }
         }
@@ -26,6 +30,16 @@
       html {
         scroll-behavior: smooth;
       }
+      
+      /* Hide scrollbar for carousel but keep functionality */
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+
       @media (max-width: 768px) {
         .promoCtaBtn { 
           font-size: 12px !important; 
@@ -48,6 +62,7 @@
           overflow: hidden !important; 
           text-overflow: ellipsis !important; 
           white-space: nowrap !important; 
+          line-height: 1.2;
         }
       }
     </style>
