@@ -6,6 +6,7 @@ import { Shop } from './components/Shop';
 import { Logo } from './components/Logo';
 import { CheckoutPage } from './components/CheckoutPage';
 import { PromoModal } from './components/PromoModal';
+import { LatestShowcase } from './components/LatestShowcase';
 
 type ViewState = 'home' | 'checkout';
 export type CategoryType = 'all' | 'Hoodie' | 'T-Shirt';
@@ -109,7 +110,12 @@ export default function App() {
       <main>
         {view === 'home' ? (
           <>
-            {currentCategory === 'all' && <Hero />}
+            {currentCategory === 'all' && (
+              <>
+                <Hero />
+                <LatestShowcase />
+              </>
+            )}
             <Shop 
               onClaimProduct={handleClaimProduct} 
               filterCategory={currentCategory}
