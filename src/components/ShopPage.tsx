@@ -123,7 +123,7 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
     <div className="bg-gray-950 pt-20">
       {/* 1. HERO SECTION */}
       <section className="relative overflow-hidden">
-        {/* Desktop Hero */}
+        {/* Desktop & Tablet Hero */}
         <div className="hidden md:grid grid-cols-2 bg-primary">
           <div className="flex flex-col justify-center p-8 md:p-12 lg:p-24 z-10 text-white">
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-black italic uppercase leading-none mb-6 tracking-tighter">
@@ -141,36 +141,40 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
           
           {/* MULTI-PRODUCT COMPOSITION - RIGHT SIDE */}
           <div className="relative h-[450px] md:h-auto bg-[#112250] overflow-hidden flex items-center justify-center p-8 lg:p-12">
-            {/* Cleaned background as per requirements: no glow, no shapes */}
+            {/* Subtle gradient glow behind images (purple → navy) */}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(139,92,246,0.2),#112250_80%)] opacity-70"></div>
             
             {/* 3D Composition Container */}
             <div className="relative w-full max-w-2xl h-full flex items-center justify-center animate-in fade-in duration-700 ease-out fill-mode-forwards">
-              
-              {/* Left Product: Scale 0.95, -10deg Rotation */}
-              <div className="absolute left-[2%] w-[42%] z-10 transition-all duration-500 transform hover:scale-105 -rotate-[10deg] scale-[0.95] opacity-0 animate-in fade-in slide-in-from-left-4 delay-200 fill-mode-forwards">
-                <img 
-                  src="https://i.postimg.cc/cLtgXFBZ/here-we-are-2026-(1).png" 
-                  alt="Premium Product Left" 
-                  className="w-full h-auto drop-shadow-[0_15px_35px_rgba(0,0,0,0.5)]"
-                />
-              </div>
+              {/* Scaling wrapper for tablet responsiveness */}
+              <div className="relative w-full h-full flex items-center justify-center md:scale-[0.8] lg:scale-100 transition-transform duration-500">
+                
+                {/* Left Product: smaller, slightly rotated -8deg, positioned left */}
+                <div className="absolute left-[0%] w-[42%] z-10 transition-all duration-500 transform hover:scale-105 -rotate-8 scale-90 opacity-0 animate-in fade-in slide-in-from-left-4 delay-200 fill-mode-forwards">
+                  <img 
+                    src="https://i.postimg.cc/cLtgXFBZ/here-we-are-2026-(1).png" 
+                    alt="Premium Product Left" 
+                    className="w-full h-auto drop-shadow-[0_15px_30px_rgba(0,0,0,0.5)]"
+                  />
+                </div>
 
-              {/* Right Product: Scale 0.95, 10deg Rotation */}
-              <div className="absolute right-[2%] w-[42%] z-10 transition-all duration-500 transform hover:scale-105 rotate-[10deg] scale-[0.95] opacity-0 animate-in fade-in slide-in-from-right-4 delay-200 fill-mode-forwards">
-                <img 
-                  src="https://i.postimg.cc/s2z8wNCz/here-we-are-2026-(2).png" 
-                  alt="Premium Product Right" 
-                  className="w-full h-auto drop-shadow-[0_15px_35px_rgba(0,0,0,0.5)]"
-                />
-              </div>
+                {/* Right Product: smaller, slightly rotated +8deg, positioned right */}
+                <div className="absolute right-[0%] w-[42%] z-10 transition-all duration-500 transform hover:scale-105 rotate-8 scale-90 opacity-0 animate-in fade-in slide-in-from-right-4 delay-200 fill-mode-forwards">
+                  <img 
+                    src="https://i.postimg.cc/s2z8wNCz/here-we-are-2026-(2).png" 
+                    alt="Premium Product Right" 
+                    className="w-full h-auto drop-shadow-[0_15px_30px_rgba(0,0,0,0.5)]"
+                  />
+                </div>
 
-              {/* Center Product: Featured - Scale 1.15, 0deg Rotation */}
-              <div className="absolute w-[55%] z-20 transition-all duration-500 transform hover:scale-[1.25] scale-[1.15] opacity-0 animate-in fade-in zoom-in-95 delay-100 fill-mode-forwards">
-                <img 
-                  src="https://i.postimg.cc/gjhQMFj3/here-we-are-2026.png" 
-                  alt="Featured Product Center" 
-                  className="w-full h-auto drop-shadow-[0_25px_65px_rgba(0,0,0,0.7)]"
-                />
+                {/* Center Product: Featured - largest, no rotation, centered forward */}
+                <div className="absolute w-[55%] z-20 transition-all duration-500 transform hover:scale-[1.25] scale-110 opacity-0 animate-in fade-in zoom-in-95 delay-100 fill-mode-forwards">
+                  <img 
+                    src="https://i.postimg.cc/gjhQMFj3/here-we-are-2026.png" 
+                    alt="Featured Product Center" 
+                    className="w-full h-auto drop-shadow-[0_25px_60px_rgba(0,0,0,0.7)]"
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -182,12 +186,12 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
             {/* Simple gradient background for mobile */}
             <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-[#112250]"></div>
             
-            {/* Single Center Item focused for mobile, scale 0.9 */}
-            <div className="relative z-10 w-full max-w-[280px]">
+            {/* Single Center Item focused for mobile, centered, full width of container */}
+            <div className="relative z-10 w-full max-w-sm">
                <img 
                  src="https://i.postimg.cc/gjhQMFj3/here-we-are-2026.png" 
                  alt="Featured Product" 
-                 className="w-full h-auto drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)] scale-[0.9] animate-in fade-in slide-in-from-bottom-5 duration-700"
+                 className="w-full h-auto drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)] animate-in fade-in slide-in-from-bottom-5 duration-700"
                />
             </div>
           </div>
