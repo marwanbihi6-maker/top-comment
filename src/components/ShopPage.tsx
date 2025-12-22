@@ -137,9 +137,9 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
           <div className="flex flex-col justify-center z-10 text-white py-24">
             <div className="flex items-center gap-3 mb-8">
               <span className="h-[3px] w-12 bg-primary"></span>
-              <span className="text-primary font-black tracking-[0.4em] text-xs uppercase italic">Direct From Studio</span>
+              <span className="text-primary font-bold tracking-[0.4em] text-[10px] uppercase">Direct From Studio</span>
             </div>
-            <h1 className="text-6xl lg:text-[100px] font-black italic uppercase leading-[0.8] mb-10 tracking-tighter">
+            <h1 className="text-6xl lg:text-[100px] font-black uppercase leading-[0.85] mb-10 tracking-tighter">
               GEAR <br /> 
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-brandPurple to-white">COLLECTIVE</span>
             </h1>
@@ -154,8 +154,8 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
                    <Zap className="w-6 h-6 text-primary fill-current relative" />
                  </div>
                  <div className="flex flex-col">
-                   <span className="text-xs font-black uppercase tracking-widest text-white leading-tight">Exclusive Benefit</span>
-                   <span className="text-primary text-sm font-bold">100% Off for Early Access</span>
+                   <span className="text-[10px] font-bold uppercase tracking-widest text-gray-300 leading-tight">Exclusive Benefit</span>
+                   <span className="text-primary text-sm font-extrabold tracking-tight">100% Off for Early Access</span>
                  </div>
               </div>
 
@@ -216,9 +216,9 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
              <div className="text-center w-full">
                 <div className="inline-flex items-center gap-2 mb-4">
                   <span className="w-2 h-2 rounded-full bg-primary animate-ping"></span>
-                  <span className="text-primary font-black uppercase text-[10px] tracking-widest italic">Live Drops</span>
+                  <span className="text-primary font-bold uppercase text-[10px] tracking-widest">Live Drops</span>
                 </div>
-                <h1 className="text-5xl font-black uppercase tracking-tighter mb-4 italic leading-none text-white">
+                <h1 className="text-5xl font-black uppercase tracking-tighter mb-4 leading-none text-white">
                   GEAR <span className="text-primary">SHOP</span>
                 </h1>
                 <p className="text-sm font-medium text-gray-400 mb-8 max-w-sm mx-auto leading-relaxed">
@@ -226,7 +226,7 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
                 </p>
                 <div className="inline-flex items-center gap-3 bg-white/5 border border-white/10 px-6 py-3 rounded-full backdrop-blur-md mb-8">
                   <Timer className="w-4 h-4 text-primary" />
-                  <span className="text-[10px] font-black uppercase tracking-[0.2em] text-white">
+                  <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-white">
                     Drop ends soon
                   </span>
                 </div>
@@ -245,7 +245,7 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
               {/* Category Filter */}
               <div className="space-y-8">
                 <div className="flex items-center justify-between">
-                  <h3 className="text-[11px] font-black uppercase tracking-[0.4em] text-primary">Browse</h3>
+                  <h3 className="text-[11px] font-bold uppercase tracking-[0.4em] text-primary">Browse</h3>
                   <LayoutGrid className="w-3 h-3 text-gray-600" />
                 </div>
                 <div className="flex flex-col items-start gap-5">
@@ -253,7 +253,7 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
                     <button 
                       key={cat}
                       onClick={() => setSelectedCategory(cat as CategoryType)}
-                      className={`text-xl font-bold transition-all hover:pl-2 flex items-center gap-4 ${selectedCategory === cat ? 'text-white' : 'text-gray-500'}`}
+                      className={`text-xl font-bold tracking-tight transition-all hover:pl-2 flex items-center gap-4 ${selectedCategory === cat ? 'text-white' : 'text-gray-500'}`}
                     >
                       <div className={`w-2 h-2 rounded-full transition-all duration-300 ${selectedCategory === cat ? 'bg-primary scale-[2.5] shadow-[0_0_10px_rgba(255,63,142,0.8)]' : 'bg-gray-800'}`}></div>
                       {cat === 'all' ? 'The Collective' : `${cat}s`}
@@ -268,7 +268,7 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
                    <div className="absolute top-0 right-0 p-2 opacity-10 group-hover:opacity-20 transition-opacity">
                      <Zap className="w-12 h-12 text-primary" />
                    </div>
-                   <p className="text-[10px] font-black text-primary uppercase tracking-[0.3em] mb-4">Stock Monitor</p>
+                   <p className="text-[10px] font-bold text-primary uppercase tracking-[0.3em] mb-4">Stock Monitor</p>
                    <div className="flex justify-between items-end mb-3">
                       <span className="text-4xl font-black text-white italic tracking-tighter">{PROMO_LIMIT - promoClaimedCount}</span>
                       <span className="text-xs font-bold text-gray-500 mb-2">Items Left</span>
@@ -299,7 +299,7 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
                 </h2>
                 <div className="flex items-center gap-2 bg-gray-900 border border-white/5 px-4 py-2 rounded-full">
                   <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
-                  <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">{filteredAndSortedProducts.length} Exclusive Items</span>
+                  <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{filteredAndSortedProducts.length} Exclusive Items</span>
                 </div>
               </div>
 
@@ -307,7 +307,7 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
                 {/* Mobile Filter Toggle */}
                 <button 
                   onClick={() => setIsFilterMobileOpen(true)}
-                  className="flex-1 lg:hidden flex items-center justify-center gap-3 bg-white text-black px-6 py-4 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-primary hover:text-white transition-all shadow-xl"
+                  className="flex-1 lg:hidden flex items-center justify-center gap-3 bg-white text-black px-6 py-4 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-primary hover:text-white transition-all shadow-xl"
                 >
                   <Filter className="w-4 h-4" /> Filter / Sort
                 </button>
@@ -316,12 +316,12 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
                 <div className="hidden lg:flex items-center gap-5">
                   <div className="flex items-center gap-2 text-gray-500">
                     <ArrowUpDown className="w-4 h-4" />
-                    <span className="text-[10px] font-black uppercase tracking-widest">Sort By</span>
+                    <span className="text-[10px] font-bold uppercase tracking-widest">Sort By</span>
                   </div>
                   <select 
                     value={sortBy}
                     onChange={(e) => setSortBy(e.target.value as any)}
-                    className="bg-gray-900/50 border border-white/5 text-white text-[11px] font-black uppercase tracking-widest px-5 py-3 rounded-xl focus:outline-none focus:border-primary transition-all cursor-pointer backdrop-blur-md"
+                    className="bg-gray-900/50 border border-white/5 text-white text-[11px] font-bold uppercase tracking-widest px-5 py-3 rounded-xl focus:outline-none focus:border-primary transition-all cursor-pointer backdrop-blur-md"
                   >
                     <option value="newest">Latest Release</option>
                     <option value="priceLow">Price: Low to High</option>
@@ -348,7 +348,7 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
 
                         {/* Top Badges */}
                         <div className="absolute top-6 left-6 right-6 z-10 flex flex-wrap gap-2 pointer-events-none">
-                           <div className={`px-4 py-2 text-[9px] font-black uppercase tracking-[0.2em] text-white rounded-lg shadow-lg ${limitReached ? 'bg-gray-800' : product.tagColor}`}>
+                           <div className={`px-4 py-2 text-[9px] font-extrabold uppercase tracking-widest text-white rounded-lg shadow-lg ${limitReached ? 'bg-gray-800' : product.tagColor}`}>
                              {limitReached ? 'Fully Claimed' : product.badge}
                            </div>
                            {!limitReached && product.edition && (
@@ -372,7 +372,7 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
                            {!limitReached ? (
                              <button 
                                onClick={() => handleClaim(product)}
-                               className="w-full py-5 bg-black text-white font-black uppercase tracking-[0.3em] text-[10px] rounded-2xl shadow-2xl transform translate-y-10 lg:group-hover:translate-y-0 transition-all duration-500 hover:bg-primary hidden lg:flex items-center justify-center gap-3"
+                               className="w-full py-5 bg-black text-white font-extrabold uppercase tracking-[0.3em] text-[10px] rounded-2xl shadow-2xl transform translate-y-10 lg:group-hover:translate-y-0 transition-all duration-500 hover:bg-primary hidden lg:flex items-center justify-center gap-3"
                              >
                                <ShoppingBag className="w-4 h-4" />
                                Secure Reservation
@@ -380,7 +380,7 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
                            ) : (
                              <div className="flex flex-col items-center gap-3 text-gray-800 transform translate-y-10 lg:group-hover:translate-y-0 transition-all duration-500">
                                <AlertCircle className="w-8 h-8" />
-                               <span className="font-black text-xs uppercase tracking-widest">Waitlist Only</span>
+                               <span className="font-bold text-[10px] uppercase tracking-widest">Waitlist Only</span>
                              </div>
                            )}
                         </div>
@@ -389,18 +389,18 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
                       {/* Product Info */}
                       <div className="mt-8 space-y-4 px-2">
                         <div className="flex items-start justify-between">
-                           <div className="flex flex-col gap-1">
-                             <span className="text-[10px] font-black text-primary uppercase tracking-[0.3em] italic">{product.category}</span>
-                             <h3 className="text-xl font-black text-white uppercase leading-[1.1] tracking-tighter line-clamp-2">
+                           <div className="flex flex-col gap-1.5">
+                             <span className="text-[10px] md:text-xs font-bold text-primary uppercase tracking-[0.2em]">{product.category}</span>
+                             <h3 className="text-xl md:text-2xl font-extrabold text-white uppercase leading-tight tracking-tight line-clamp-2">
                                {product.name}
                              </h3>
                            </div>
                            <div className="text-right flex flex-col items-end">
                              <div className="flex items-center gap-3">
-                               <span className="text-sm line-through text-gray-600 font-bold tracking-tight">${product.originalPrice.toFixed(0)}</span>
-                               <span className="text-2xl font-black text-primary italic leading-none">FREE</span>
+                               <span className="text-xs md:text-sm line-through text-gray-600 font-medium tracking-tight">${product.originalPrice.toFixed(0)}</span>
+                               <span className="text-2xl md:text-3xl font-black text-primary leading-none">FREE</span>
                              </div>
-                             <span className="text-[8px] font-bold text-gray-500 uppercase tracking-widest mt-1">100% Promo Applied</span>
+                             <span className="text-[8px] font-bold text-gray-500 uppercase tracking-widest mt-2">100% Promo Applied</span>
                            </div>
                         </div>
                       </div>
@@ -409,7 +409,7 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
                       <button 
                         onClick={() => handleClaim(product)}
                         disabled={limitReached}
-                        className={`mt-8 w-full py-5 rounded-2xl text-[10px] font-black uppercase tracking-[0.3em] transition-all shadow-2xl lg:hidden
+                        className={`mt-8 w-full py-5 rounded-2xl text-[10px] font-bold uppercase tracking-[0.3em] transition-all shadow-2xl lg:hidden
                                   ${limitReached ? 'bg-gray-800 text-gray-600 cursor-not-allowed border border-white/5' : 'bg-primary text-white active:scale-95'}`}
                       >
                         {limitReached ? 'Sold Out' : 'Claim Now'}
@@ -424,11 +424,11 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
                    <div className="absolute inset-0 bg-primary/20 blur-3xl rounded-full"></div>
                    <AlertCircle className="w-24 h-24 text-gray-800 relative" />
                 </div>
-                <h4 className="text-3xl font-black uppercase italic tracking-tighter text-gray-700 mb-4">Stock Exhausted</h4>
+                <h4 className="text-3xl font-black uppercase tracking-tighter text-gray-700 mb-4">Stock Exhausted</h4>
                 <p className="text-gray-500 font-medium mb-10 max-w-xs text-center">Try adjusting your filters or check back for the next drop.</p>
                 <button 
                   onClick={() => setSelectedCategory('all')} 
-                  className="bg-white text-black px-10 py-4 rounded-full font-black uppercase tracking-widest text-[10px] hover:bg-primary hover:text-white transition-all shadow-xl"
+                  className="bg-white text-black px-10 py-4 rounded-full font-bold uppercase tracking-widest text-[10px] hover:bg-primary hover:text-white transition-all shadow-xl"
                 >
                   Clear All Filters
                 </button>
@@ -447,7 +447,7 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
              
              <div className="flex items-center justify-between mb-12">
                <div>
-                 <h2 className="text-3xl font-black italic uppercase text-white tracking-tighter">REFINE</h2>
+                 <h2 className="text-3xl font-black uppercase text-white tracking-tighter">REFINE</h2>
                  <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mt-1">Select your preferences</p>
                </div>
                <button onClick={() => setIsFilterMobileOpen(false)} className="p-3 bg-white/5 rounded-2xl text-gray-500 hover:text-white transition-colors">
@@ -458,13 +458,13 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
              <div className="space-y-12 overflow-y-auto no-scrollbar pb-10">
                {/* Categories */}
                <div className="space-y-6">
-                 <h3 className="text-[10px] font-black uppercase tracking-[0.4em] text-primary">By Category</h3>
+                 <h3 className="text-[10px] font-bold uppercase tracking-[0.4em] text-primary">By Category</h3>
                  <div className="flex flex-col gap-3">
                    {['all', 'Hoodie', 'T-Shirt'].map(cat => (
                      <button 
                        key={cat}
                        onClick={() => { setSelectedCategory(cat as CategoryType); setIsFilterMobileOpen(false); }}
-                       className={`w-full py-5 rounded-2xl text-lg font-black transition-all border-2 text-left px-8 flex items-center justify-between ${selectedCategory === cat ? 'bg-primary border-primary text-white shadow-xl shadow-primary/20' : 'bg-gray-900 border-white/5 text-gray-500'}`}
+                       className={`w-full py-5 rounded-2xl text-lg font-bold transition-all border-2 text-left px-8 flex items-center justify-between ${selectedCategory === cat ? 'bg-primary border-primary text-white shadow-xl shadow-primary/20' : 'bg-gray-900 border-white/5 text-gray-500'}`}
                      >
                        {cat === 'all' ? 'All Drops' : `${cat}s`}
                        {selectedCategory === cat && <Zap className="w-5 h-5 fill-current" />}
@@ -475,7 +475,7 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
                
                {/* Sort Order */}
                <div className="space-y-6">
-                 <h3 className="text-[10px] font-black uppercase tracking-[0.4em] text-primary">Display Order</h3>
+                 <h3 className="text-[10px] font-bold uppercase tracking-[0.4em] text-primary">Display Order</h3>
                  <div className="grid grid-cols-2 gap-4">
                    {[
                      { id: 'newest', label: 'Latest' },
@@ -486,7 +486,7 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
                      <button 
                        key={opt.id}
                        onClick={() => { setSortBy(opt.id as any); setIsFilterMobileOpen(false); }}
-                       className={`py-5 rounded-2xl text-[10px] font-black uppercase tracking-widest border-2 ${sortBy === opt.id ? 'bg-white text-black border-white shadow-xl' : 'bg-gray-900/50 border-white/5 text-gray-500'}`}
+                       className={`py-5 rounded-2xl text-[10px] font-bold uppercase tracking-widest border-2 ${sortBy === opt.id ? 'bg-white text-black border-white shadow-xl' : 'bg-gray-900/50 border-white/5 text-gray-500'}`}
                      >
                        {opt.label}
                      </button>
