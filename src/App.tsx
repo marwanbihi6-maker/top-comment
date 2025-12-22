@@ -110,17 +110,20 @@ export default function App() {
       <main>
         {view === 'home' ? (
           <>
-            {currentCategory === 'all' && (
+            {currentCategory === 'all' ? (
               <>
                 <Hero />
-                <LatestShowcase />
+                <div id="shop">
+                  <LatestShowcase />
+                </div>
               </>
+            ) : (
+              <Shop 
+                onClaimProduct={handleClaimProduct} 
+                filterCategory={currentCategory}
+                onCategoryChange={handleCategoryChange}
+              />
             )}
-            <Shop 
-              onClaimProduct={handleClaimProduct} 
-              filterCategory={currentCategory}
-              onCategoryChange={handleCategoryChange}
-            />
           </>
         ) : (
           <CheckoutPage 
