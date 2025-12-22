@@ -8,9 +8,11 @@ import { CheckoutPage } from './components/CheckoutPage';
 import { PromoModal } from './components/PromoModal';
 
 type ViewState = 'home' | 'checkout';
+export type CategoryType = 'all' | 'Hoodie' | 'T-Shirt';
 
 export default function App() {
   const [view, setView] = useState<ViewState>('home');
+  const [currentCategory, setCurrentCategory] = useState<CategoryType>('all');
   const [selectedProduct, setSelectedProduct] = useState<any>(null);
   const [showPromoModal, setShowPromoModal] = useState(false);
 
@@ -62,6 +64,19 @@ export default function App() {
     setSelectedProduct(null);
   };
 
+  const handleCategoryChange = (category: CategoryType) => {
+    setCurrentCategory(category);
+    setView('home');
+    
+    // Scroll to shop after a small delay to ensure view update
+    setTimeout(() => {
+      const shopSection = document.getElementById('shop');
+      if (shopSection) {
+        shopSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 50);
+  };
+
   const handleConfirmOrder = (details: any) => {
     // 1. Check existing limit in localStorage again to prevent race conditions
     const savedCount = localStorage.getItem('getmyidea_promo_claims');
@@ -89,13 +104,17 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-gray-900 text-white font-sans selection:bg-primary selection:text-white">
-      <Navbar />
+      <Navbar onCategorySelect={handleCategoryChange} activeCategory={currentCategory} />
       
       <main>
         {view === 'home' ? (
           <>
-            <Hero />
-            <Shop onClaimProduct={handleClaimProduct} />
+            {currentCategory === 'all' && <Hero />}
+            <Shop 
+              onClaimProduct={handleClaimProduct} 
+              filterCategory={currentCategory}
+              onCategoryChange={handleCategoryChange}
+            />
           </>
         ) : (
           <CheckoutPage 

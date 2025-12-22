@@ -1,8 +1,15 @@
+
 import React, { useState, useEffect } from 'react';
 import { ShoppingBag, Search, Menu, X, User, Heart } from 'lucide-react';
 import { Logo } from './Logo';
+import { CategoryType } from '../App';
 
-export const Navbar: React.FC = () => {
+interface NavbarProps {
+  onCategorySelect?: (category: CategoryType) => void;
+  activeCategory?: CategoryType;
+}
+
+export const Navbar: React.FC<NavbarProps> = ({ onCategorySelect, activeCategory = 'all' }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -15,12 +22,20 @@ export const Navbar: React.FC = () => {
   }, []);
 
   const navLinks = [
-    { name: 'Home', href: '#' },
-    { name: 'Shop', href: '#shop' },
-    { name: 'Collections', href: '#' },
-    { name: 'Blog', href: '#' },
-    { name: 'Contact', href: '#' },
+    { name: 'All Products', category: 'all' as CategoryType },
+    { name: 'Hoodies', category: 'Hoodie' as CategoryType },
+    { name: 'T-Shirts', category: 'T-Shirt' as CategoryType },
+    { name: 'Collections', category: 'all' as CategoryType, disabled: true },
+    { name: 'Contact', category: 'all' as CategoryType, disabled: true },
   ];
+
+  const handleNavClick = (category: CategoryType, e: React.MouseEvent) => {
+    if (onCategorySelect) {
+      e.preventDefault();
+      onCategorySelect(category);
+      setIsMobileMenuOpen(false);
+    }
+  };
 
   return (
     <nav 
@@ -30,21 +45,29 @@ export const Navbar: React.FC = () => {
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
-        <a href="#" className="flex items-center group cursor-pointer no-underline" aria-label="GetMyIdea Home">
+        <button 
+          onClick={(e) => handleNavClick('all', e)} 
+          className="flex items-center group cursor-pointer no-underline bg-transparent border-none p-0" 
+          aria-label="GetMyIdea Home"
+        >
           <Logo className="text-2xl sm:text-3xl" />
-        </a>
+        </button>
 
         {/* Desktop Links */}
         <div className="hidden md:flex items-center space-x-8">
           {navLinks.map((link) => (
-            <a
+            <button
               key={link.name}
-              href={link.href}
-              className="text-sm font-medium text-gray-300 hover:text-white transition-colors relative group"
+              onClick={(e) => !link.disabled && handleNavClick(link.category, e)}
+              className={`text-sm font-medium transition-colors relative group bg-transparent border-none p-0 ${
+                activeCategory === link.category && !link.disabled ? 'text-white' : 'text-gray-400 hover:text-white'
+              } ${link.disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
             >
               {link.name}
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
-            </a>
+              <span className={`absolute -bottom-1 left-0 h-0.5 bg-primary transition-all duration-300 ${
+                activeCategory === link.category && !link.disabled ? 'w-full' : 'w-0 group-hover:w-full'
+              }`}></span>
+            </button>
           ))}
         </div>
 
@@ -80,14 +103,15 @@ export const Navbar: React.FC = () => {
       {isMobileMenuOpen && (
         <div className="absolute top-full left-0 right-0 bg-gray-900 border-t border-gray-800 p-6 md:hidden flex flex-col space-y-4 shadow-2xl animate-in slide-in-from-top-5">
           {navLinks.map((link) => (
-            <a
+            <button
               key={link.name}
-              href={link.href}
-              className="text-lg font-medium text-gray-300 hover:text-white"
-              onClick={() => setIsMobileMenuOpen(false)}
+              onClick={(e) => !link.disabled && handleNavClick(link.category, e)}
+              className={`text-lg font-medium text-left bg-transparent border-none p-0 transition-colors ${
+                activeCategory === link.category && !link.disabled ? 'text-primary' : 'text-gray-300 hover:text-white'
+              } ${link.disabled ? 'opacity-30 cursor-not-allowed' : 'cursor-pointer'}`}
             >
               {link.name}
-            </a>
+            </button>
           ))}
           <div className="flex items-center space-x-6 pt-4 border-t border-gray-800">
              <button className="text-gray-300 hover:text-white"><Search className="w-6 h-6" /></button>
