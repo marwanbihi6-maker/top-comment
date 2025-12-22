@@ -122,7 +122,7 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
       {/* 1. HERO SECTION */}
       <section className="relative overflow-hidden border-b border-white/5 bg-gray-950">
         {/* Desktop Hero (lg: screens >= 1024px) */}
-        <div className="hidden lg:grid grid-cols-2">
+        <div className="hidden lg:grid grid-cols-2 min-h-[600px]">
           {/* Left Text Block */}
           <div className="flex flex-col justify-center p-12 lg:p-24 z-10 text-white relative">
             <div className="flex items-center gap-2 mb-6">
@@ -147,26 +147,34 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
           </div>
           
           {/* Right Visual Section (3-Product Composition) */}
-          <div className="relative h-[650px] flex items-center justify-center overflow-visible pr-12">
-            <div className="relative w-full h-full flex items-center justify-center">
+          <div className="relative h-full flex items-center justify-center overflow-visible">
+            <div className="relative w-full h-full max-w-[700px] flex items-center justify-center">
               {/* Left Item */}
-              <img 
-                src="https://i.postimg.cc/cLtgXFBZ/here-we-are-2026-(1).png" 
-                alt="Product Left"
-                className="absolute left-[5%] w-[42%] z-10 -rotate-6 scale-90 drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)] transition-transform duration-500 hover:scale-95"
-              />
+              <div className="absolute left-[5%] w-[40%] z-10 transition-transform duration-500 hover:scale-95" style={{ transform: 'rotate(-6deg) scale(0.9)' }}>
+                <img 
+                  src="https://i.postimg.cc/cLtgXFBZ/here-we-are-2026-(1).png" 
+                  alt="Product Left"
+                  className="w-full h-auto drop-shadow-[0_15px_30px_rgba(0,0,0,0.6)]"
+                />
+              </div>
+              
               {/* Right Item */}
-              <img 
-                src="https://i.postimg.cc/s2z8wNCz/here-we-are-2026-(2).png" 
-                alt="Product Right"
-                className="absolute right-[5%] w-[42%] z-10 rotate-6 scale-90 drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)] transition-transform duration-500 hover:scale-95"
-              />
+              <div className="absolute right-[5%] w-[40%] z-10 transition-transform duration-500 hover:scale-95" style={{ transform: 'rotate(6deg) scale(0.9)' }}>
+                <img 
+                  src="https://i.postimg.cc/s2z8wNCz/here-we-are-2026-(2).png" 
+                  alt="Product Right"
+                  className="w-full h-auto drop-shadow-[0_15px_30px_rgba(0,0,0,0.6)]"
+                />
+              </div>
+
               {/* Center Item */}
-              <img 
-                src="https://i.postimg.cc/gjhQMFj3/here-we-are-2026.png" 
-                alt="Product Center"
-                className="absolute w-[52%] z-20 scale-110 drop-shadow-[0_30px_60px_rgba(0,0,0,0.6)] transition-transform duration-500 hover:scale-[1.15]"
-              />
+              <div className="absolute w-[50%] z-20 transition-transform duration-500 hover:scale-[1.15]" style={{ transform: 'scale(1.1)' }}>
+                <img 
+                  src="https://i.postimg.cc/gjhQMFj3/here-we-are-2026.png" 
+                  alt="Product Center"
+                  className="w-full h-auto drop-shadow-[0_25px_50px_rgba(0,0,0,0.7)]"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -177,7 +185,7 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
              <img 
                src="https://i.postimg.cc/gjhQMFj3/here-we-are-2026.png" 
                alt="Featured Product" 
-               className="w-full max-w-[320px] h-auto drop-shadow-[0_25px_50px_rgba(0,0,0,0.5)]" 
+               className="w-full max-w-[320px] h-auto drop-shadow-[0_25px_50px_rgba(0,0,0,0.7)]" 
              />
           </div>
           <div className="bg-primary pt-8 pb-10 px-8 text-center text-white relative">
