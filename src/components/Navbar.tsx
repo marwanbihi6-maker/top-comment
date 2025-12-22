@@ -6,10 +6,11 @@ import { CategoryType } from '../App';
 
 interface NavbarProps {
   onCategorySelect?: (category: CategoryType) => void;
+  onLogoClick?: () => void;
   activeCategory?: CategoryType;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onCategorySelect, activeCategory = 'all' }) => {
+export const Navbar: React.FC<NavbarProps> = ({ onCategorySelect, onLogoClick, activeCategory = 'all' }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -22,19 +23,23 @@ export const Navbar: React.FC<NavbarProps> = ({ onCategorySelect, activeCategory
   }, []);
 
   const navLinks = [
-    { name: 'All Products', category: 'all' as CategoryType },
-    { name: 'Hoodies', category: 'Hoodie' as CategoryType },
-    { name: 'T-Shirts', category: 'T-Shirt' as CategoryType },
-    { name: 'Collections', category: 'all' as CategoryType, disabled: true },
-    { name: 'Contact', category: 'all' as CategoryType, disabled: true },
+    { name: 'Home', action: 'home' },
+    { name: 'Shop All', action: 'shop', category: 'all' as CategoryType },
+    { name: 'Hoodies', action: 'shop', category: 'Hoodie' as CategoryType },
+    { name: 'T-Shirts', action: 'shop', category: 'T-Shirt' as CategoryType },
+    { name: 'Contact', action: 'none', disabled: true },
   ];
 
-  const handleNavClick = (category: CategoryType, e: React.MouseEvent) => {
-    if (onCategorySelect) {
-      e.preventDefault();
-      onCategorySelect(category);
-      setIsMobileMenuOpen(false);
+  const handleNavClick = (link: any, e: React.MouseEvent) => {
+    e.preventDefault();
+    if (link.disabled) return;
+    
+    if (link.action === 'home' && onLogoClick) {
+      onLogoClick();
+    } else if (link.action === 'shop' && onCategorySelect) {
+      onCategorySelect(link.category);
     }
+    setIsMobileMenuOpen(false);
   };
 
   return (
@@ -46,7 +51,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onCategorySelect, activeCategory
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
         <button 
-          onClick={(e) => handleNavClick('all', e)} 
+          onClick={(e) => { e.preventDefault(); onLogoClick?.(); }} 
           className="flex items-center group cursor-pointer no-underline bg-transparent border-none p-0" 
           aria-label="GetMyIdea Home"
         >
@@ -58,7 +63,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onCategorySelect, activeCategory
           {navLinks.map((link) => (
             <button
               key={link.name}
-              onClick={(e) => !link.disabled && handleNavClick(link.category, e)}
+              onClick={(e) => handleNavClick(link, e)}
               className={`text-sm font-medium transition-colors relative group bg-transparent border-none p-0 ${
                 activeCategory === link.category && !link.disabled ? 'text-white' : 'text-gray-400 hover:text-white'
               } ${link.disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
@@ -105,7 +110,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onCategorySelect, activeCategory
           {navLinks.map((link) => (
             <button
               key={link.name}
-              onClick={(e) => !link.disabled && handleNavClick(link.category, e)}
+              onClick={(e) => handleNavClick(link, e)}
               className={`text-lg font-medium text-left bg-transparent border-none p-0 transition-colors ${
                 activeCategory === link.category && !link.disabled ? 'text-primary' : 'text-gray-300 hover:text-white'
               } ${link.disabled ? 'opacity-30 cursor-not-allowed' : 'cursor-pointer'}`}
@@ -113,11 +118,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onCategorySelect, activeCategory
               {link.name}
             </button>
           ))}
-          <div className="flex items-center space-x-6 pt-4 border-t border-gray-800">
-             <button className="text-gray-300 hover:text-white"><Search className="w-6 h-6" /></button>
-             <button className="text-gray-300 hover:text-white"><ShoppingBag className="w-6 h-6" /></button>
-             <button className="text-gray-300 hover:text-white"><User className="w-6 h-6" /></button>
-          </div>
         </div>
       )}
     </nav>

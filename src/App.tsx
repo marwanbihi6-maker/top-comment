@@ -2,13 +2,13 @@
 import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
-import { Shop } from './components/Shop';
 import { Logo } from './components/Logo';
 import { CheckoutPage } from './components/CheckoutPage';
 import { PromoModal } from './components/PromoModal';
 import { LatestShowcase } from './components/LatestShowcase';
+import { ShopPage } from './components/ShopPage';
 
-type ViewState = 'home' | 'checkout';
+type ViewState = 'home' | 'shop' | 'checkout';
 export type CategoryType = 'all' | 'Hoodie' | 'T-Shirt';
 
 export default function App() {
@@ -18,12 +18,8 @@ export default function App() {
   const [showPromoModal, setShowPromoModal] = useState(false);
 
   useEffect(() => {
-    // Check if user has already seen the modal
     const hasSeenPromo = localStorage.getItem('getmyidea_promo_dismissed');
-    
-    // Only show if not seen before
     if (!hasSeenPromo) {
-      // Delay appearance by 1.5 seconds for better UX
       const timer = setTimeout(() => {
         setShowPromoModal(true);
       }, 1500);
@@ -39,19 +35,8 @@ export default function App() {
   const handlePromoAction = () => {
     setShowPromoModal(false);
     localStorage.setItem('getmyidea_promo_dismissed', 'true');
-    
-    // Navigate to home if not there
-    if (view !== 'home') {
-      setView('home');
-    }
-
-    // Scroll to shop section
-    setTimeout(() => {
-      const shopSection = document.getElementById('shop');
-      if (shopSection) {
-        shopSection.scrollIntoView({ behavior: 'smooth' });
-      }
-    }, 100);
+    setView('shop');
+    window.scrollTo(0, 0);
   };
 
   const handleClaimProduct = (product: any) => {
@@ -61,25 +46,17 @@ export default function App() {
   };
 
   const handleBackToShop = () => {
-    setView('home');
+    setView('shop');
     setSelectedProduct(null);
   };
 
   const handleCategoryChange = (category: CategoryType) => {
     setCurrentCategory(category);
-    setView('home');
-    
-    // Scroll to shop after a small delay to ensure view update
-    setTimeout(() => {
-      const shopSection = document.getElementById('shop');
-      if (shopSection) {
-        shopSection.scrollIntoView({ behavior: 'smooth' });
-      }
-    }, 50);
+    setView('shop');
+    window.scrollTo(0, 0);
   };
 
   const handleConfirmOrder = (details: any) => {
-    // 1. Check existing limit in localStorage again to prevent race conditions
     const savedCount = localStorage.getItem('getmyidea_promo_claims');
     const currentCount = savedCount ? parseInt(savedCount, 10) : 0;
     const PROMO_LIMIT = 10;
@@ -91,41 +68,52 @@ export default function App() {
       return;
     }
 
-    // 2. Increment and save
     const newCount = currentCount + 1;
     localStorage.setItem('getmyidea_promo_claims', newCount.toString());
 
-    // 3. Success Feedback
     alert(`🎉 Success! Your item "${selectedProduct.name}" has been reserved! We will ship it to ${details.fullName}.`);
     
-    // 4. Reset
     setView('home');
     setSelectedProduct(null);
   };
 
+  const handleGoToHome = () => {
+    setView('home');
+    setCurrentCategory('all');
+    window.scrollTo(0, 0);
+  };
+
+  const handleGoToShop = () => {
+    setView('shop');
+    window.scrollTo(0, 0);
+  };
+
   return (
-    <div className="min-h-screen bg-gray-900 text-white font-sans selection:bg-primary selection:text-white">
-      <Navbar onCategorySelect={handleCategoryChange} activeCategory={currentCategory} />
+    <div className="min-h-screen bg-gray-950 text-white font-sans selection:bg-primary selection:text-white">
+      <Navbar 
+        onCategorySelect={handleCategoryChange} 
+        activeCategory={currentCategory} 
+        onLogoClick={handleGoToHome}
+      />
       
       <main>
-        {view === 'home' ? (
+        {view === 'home' && (
           <>
-            {currentCategory === 'all' ? (
-              <>
-                <Hero />
-                <div id="shop">
-                  <LatestShowcase />
-                </div>
-              </>
-            ) : (
-              <Shop 
-                onClaimProduct={handleClaimProduct} 
-                filterCategory={currentCategory}
-                onCategoryChange={handleCategoryChange}
-              />
-            )}
+            <Hero onShopClick={handleGoToShop} />
+            <div id="shop">
+              <LatestShowcase onShopNowClick={handleGoToShop} />
+            </div>
           </>
-        ) : (
+        )}
+
+        {view === 'shop' && (
+          <ShopPage 
+            onClaimProduct={handleClaimProduct} 
+            initialCategory={currentCategory}
+          />
+        )}
+
+        {view === 'checkout' && (
           <CheckoutPage 
             product={selectedProduct} 
             onBack={handleBackToShop} 
@@ -134,7 +122,6 @@ export default function App() {
         )}
       </main>
 
-      {/* Welcome Promotion Modal */}
       {showPromoModal && (
         <PromoModal 
           onClose={handleDismissPromo}
