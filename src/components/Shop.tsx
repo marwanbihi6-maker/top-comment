@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useMemo } from 'react';
 import { ShoppingBag, Heart, AlertCircle } from 'lucide-react';
 import { CategoryType } from '../App';
@@ -6,7 +7,7 @@ const products = [
   {
     id: 1,
     name: 'Here we are 2026',
-    price: '$0.00',
+    price: '$14.00',
     originalPrice: '$45.00',
     category: 'T-Shirt',
     image: 'https://i.postimg.cc/2S2ZF2ks/here-we-are-2026.png'
@@ -14,7 +15,7 @@ const products = [
   {
     id: 2,
     name: 'mr penis',
-    price: '$0.00',
+    price: '$14.00',
     originalPrice: '$85.00',
     category: 'Hoodie',
     image: 'https://i.postimg.cc/X7hMG0Fh/here-we-are-2026-(1).png'
@@ -22,7 +23,7 @@ const products = [
   {
     id: 3,
     name: 'ledragon',
-    price: '$0.00',
+    price: '$14.00',
     originalPrice: '$48.00',
     category: 'T-Shirt',
     image: 'https://i.postimg.cc/0ywLWLY3/here-we-are-2026-(2).png'
@@ -30,7 +31,7 @@ const products = [
   {
     id: 4,
     name: 'ANGRY AFRICAN DAD Gets SCAMMED',
-    price: '$0.00',
+    price: '$14.00',
     originalPrice: '$95.00',
     category: 'Hoodie',
     image: 'https://i.postimg.cc/hvZR6L82/here-we-are-2026-(6).png'
@@ -38,7 +39,7 @@ const products = [
   {
     id: 5,
     name: 'house',
-    price: '$0.00',
+    price: '$14.00',
     originalPrice: '$42.00',
     category: 'Hoodie',
     image: 'https://i.postimg.cc/FzHV13tJ/here-we-are-2026-(5).png'
@@ -46,7 +47,7 @@ const products = [
   {
     id: 6,
     name: 'JESUS IS KING',
-    price: '$0.00',
+    price: '$14.00',
     originalPrice: '$88.00',
     category: 'Hoodie',
     image: 'https://i.postimg.cc/GtMwsFHg/here-we-are-2026-(4).png'
@@ -54,7 +55,7 @@ const products = [
   {
     id: 7,
     name: 'Jane Doe',
-    price: '$0.00',
+    price: '$14.00',
     originalPrice: '$85.00',
     category: 'Hoodie',
     image: 'https://i.postimg.cc/hjmz4PyC/here-we-are-2026-(8).png'
@@ -62,7 +63,7 @@ const products = [
   {
     id: 8,
     name: 'Miyabi head scratches',
-    price: '$0.00',
+    price: '$14.00',
     originalPrice: '$85.00',
     category: 'Hoodie',
     image: 'https://i.postimg.cc/JhjL8s8S/here-we-are-2026-(9).png'
@@ -70,7 +71,7 @@ const products = [
   {
     id: 9,
     name: 'Office Dancing Zone',
-    price: '$0.00',
+    price: '$14.00',
     originalPrice: '$85.00',
     category: 'Hoodie',
     image: 'https://i.postimg.cc/MpvB9SwG/here-we-are-2026-(11).png'
@@ -90,12 +91,10 @@ const ProductCard: React.FC<{
 }> = ({ product, limitReached, onClaim }) => {
   return (
     <div className="group relative flex flex-col w-[85vw] md:w-full shrink-0 snap-center md:snap-align-none">
-      {/* Outer Card Wrapper with BullAirs inspired Border Style */}
       <div className="relative p-0 rounded-[18px] transition-all duration-500 ease-out 
                       border-[1px] border-white/10 hover:border-brandPurple/60 
                       bg-gray-900 shadow-[0_20px_40px_rgba(0,0,0,0.4)] hover:scale-[1.03] overflow-hidden">
         
-        {/* Image Container */}
         <div className="relative aspect-square overflow-hidden bg-white mb-0">
           <img
             src={product.image}
@@ -103,15 +102,13 @@ const ProductCard: React.FC<{
             className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
           />
           
-          {/* BullAirs Style Rectangular Badge - Sharp edges, exact padding */}
           <div className="absolute top-0 left-0 z-30">
             <div className={`px-4 py-2 text-[11px] font-black uppercase tracking-widest 
                             bg-gradient-to-r from-primary to-brandPurple text-white shadow-lg`}>
-              {limitReached ? 'Offer Ended' : '100% OFF – Limited to first 10'}
+              {limitReached ? 'Offer Ended' : 'SPECIAL PRICE – $14.00 ONLY'}
             </div>
           </div>
 
-          {/* Overlay Actions for Desktop */}
           <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden md:flex items-center justify-center p-6">
             {!limitReached ? (
               <button 
@@ -119,7 +116,7 @@ const ProductCard: React.FC<{
                 className="w-full py-4 bg-white text-gray-900 font-extrabold rounded-md shadow-2xl flex items-center justify-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 hover:bg-primary hover:text-white"
               >
                 <ShoppingBag className="w-5 h-5" />
-                CLAIM NOW
+                GET IT FOR $14
               </button>
             ) : (
               <div className="flex flex-col items-center gap-1 text-white text-center transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
@@ -130,7 +127,6 @@ const ProductCard: React.FC<{
           </div>
         </div>
 
-        {/* Product Info Section - Refined Spacing & Typography */}
         <div className="p-6 md:p-8 space-y-3 bg-gray-900">
           <h3 className="text-lg md:text-2xl font-black text-white leading-[1.2] uppercase tracking-tight min-h-[3rem] line-clamp-2">
             {product.name}
@@ -145,7 +141,6 @@ const ProductCard: React.FC<{
           </div>
         </div>
 
-        {/* Mobile CTA (Persistent) */}
         <div className="px-6 pb-6 md:hidden">
             <button 
               onClick={() => onClaim(product)}
@@ -153,7 +148,7 @@ const ProductCard: React.FC<{
               className={`w-full py-4 font-black rounded-md text-xs tracking-widest uppercase transition-all shadow-lg
                         ${limitReached ? 'bg-gray-800 text-gray-500 cursor-not-allowed border border-gray-700' : 'bg-primary text-white active:scale-95'}`}
             >
-              {limitReached ? 'Fully Claimed' : 'Claim 100% OFF'}
+              {limitReached ? 'Fully Claimed' : 'Claim for $14'}
             </button>
         </div>
       </div>
@@ -191,7 +186,6 @@ export const Shop: React.FC<ShopProps> = ({ onClaimProduct, filterCategory = 'al
 
   return (
     <section id="shop" className={`py-24 md:py-40 px-6 bg-gray-950 relative overflow-hidden transition-all duration-700 ${filterCategory !== 'all' ? 'pt-40' : ''}`}>
-      {/* BullAirs inspired background atmosphere */}
       <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_20%_30%,rgba(255,63,142,0.03),transparent_50%),radial-gradient(circle_at_80%_70%,rgba(139,92,246,0.03),transparent_50%)] pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto relative z-10">
@@ -209,7 +203,7 @@ export const Shop: React.FC<ShopProps> = ({ onClaimProduct, filterCategory = 'al
               )}
             </h2>
             <p className="text-gray-400 text-base md:text-lg font-medium leading-relaxed">
-              New, limited, and exclusive items are being added regularly so stay tuned!
+              New, limited, and exclusive items are being added regularly for just $14!
             </p>
           </div>
           
@@ -230,7 +224,6 @@ export const Shop: React.FC<ShopProps> = ({ onClaimProduct, filterCategory = 'al
         </div>
 
         {filteredProducts.length > 0 ? (
-          /* Responsive Layout: Swipeable Carousel on Mobile, Clean Grid on Desktop */
           <div className="flex md:grid md:grid-cols-3 gap-8 md:gap-16 overflow-x-auto md:overflow-visible no-scrollbar snap-x snap-mandatory px-0 -mx-6 md:mx-0 pl-6 md:pl-0">
             {filteredProducts.map((product) => (
               <ProductCard 
@@ -240,7 +233,6 @@ export const Shop: React.FC<ShopProps> = ({ onClaimProduct, filterCategory = 'al
                 onClaim={handleAddToCart} 
               />
             ))}
-            {/* Empty space for mobile carousel padding right */}
             <div className="w-6 shrink-0 md:hidden"></div>
           </div>
         ) : (
@@ -255,7 +247,6 @@ export const Shop: React.FC<ShopProps> = ({ onClaimProduct, filterCategory = 'al
           </div>
         )}
 
-        {/* Swipe indicator for mobile only */}
         <div className="flex justify-center gap-3 mt-12 md:hidden">
             <div className="w-12 h-1 bg-primary rounded-full"></div>
             <div className="w-3 h-1 bg-gray-800 rounded-full"></div>

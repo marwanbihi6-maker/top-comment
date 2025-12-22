@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { ArrowLeft, Lock } from 'lucide-react';
+import { ArrowLeft, Lock, CreditCard } from 'lucide-react';
 import { Button } from './Button';
 
 interface CheckoutPageProps {
@@ -19,32 +19,22 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({ product, onBack, onC
   const [isValidated, setIsValidated] = useState(false);
 
   // STEP 1: Validate Fields Only
-  // This function prepares the UI for the second step but does NOT call the locker.
   const handleValidateDetails = (e: React.MouseEvent) => {
     e.preventDefault();
     
-    // 1. Validate fields
     if (!formData.fullName.trim() || !formData.phone.trim() || !formData.address.trim()) {
       alert("Please fill in all required fields.");
       return;
     }
 
-    // 2. Move to Step 2
     setIsValidated(true);
   };
 
-  // STEP 2: Trigger Locker
-  // This function MUST NOT contain validation logic or async delays to work on mobile.
-  const handleTriggerLocker = (e: React.MouseEvent) => {
+  // STEP 2: Redirect to Payment
+  const handleTriggerPayment = (e: React.MouseEvent) => {
     e.preventDefault();
-
-    if (typeof (window as any)._cy === 'function') {
-      // Direct call required for mobile browsers
-      (window as any)._cy();
-    } else {
-      console.error("Locker script not loaded");
-      alert("Security verification is still loading. Please wait a moment and try again.");
-    }
+    // Redirect to specified OxaPay payment link
+    window.location.href = "https://pay.oxapay.com/13689248";
   };
 
   if (!product) return null;
@@ -70,19 +60,19 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({ product, onBack, onC
                 className="w-full h-full object-cover"
               />
               <div className="absolute top-4 right-4 bg-primary text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">
-                100% OFF
+                FLASH SALE
               </div>
             </div>
             
             <div className="text-center lg:text-left space-y-2">
               <h2 className="text-3xl font-bold text-white tracking-tight">{product.name}</h2>
               <div className="flex items-center justify-center lg:justify-start gap-4">
-                <span className="text-gray-500 line-through text-lg font-medium">{product.originalPrice}</span>
-                <span className="text-primary font-bold text-xl">100% Discount Applied</span>
+                <span className="text-gray-500 line-through text-lg font-medium">${product.originalPrice?.toFixed(2) || "45.00"}</span>
+                <span className="text-primary font-bold text-xl">Special Promo: $14.00</span>
               </div>
               <p className="text-gray-400 text-sm mt-4 max-w-md mx-auto lg:mx-0 leading-relaxed">
-                You are claiming a limited edition promotional item. 
-                Shipping details are required to verify your reservation and ensure delivery.
+                You are claiming a limited edition promotional item at our exclusive price. 
+                Proceed to secure payment to finalize your reservation.
               </p>
             </div>
           </div>
@@ -94,7 +84,6 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({ product, onBack, onC
               <p className="text-gray-400 text-sm">Where should we send your item?</p>
             </div>
 
-            {/* Use preventDefault on form to ensure Enter key doesn't reload */}
             <form onSubmit={(e) => e.preventDefault()} className="space-y-6">
               <div>
                 <label htmlFor="fullName" className="block text-sm font-medium text-gray-300 mb-2">
@@ -104,7 +93,7 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({ product, onBack, onC
                   type="text"
                   id="fullName"
                   required
-                  disabled={isValidated} // Lock inputs after validation
+                  disabled={isValidated}
                   value={formData.fullName}
                   onChange={(e) => setFormData({...formData, fullName: e.target.value})}
                   className="w-full bg-gray-900/50 border border-gray-700 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all disabled:opacity-50 disabled:cursor-not-allowed"
@@ -146,30 +135,28 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({ product, onBack, onC
 
               <div className="pt-4">
                 {!isValidated ? (
-                  /* STEP 1: VALIDATION BUTTON */
                   <Button 
                     type="button" 
                     onClick={handleValidateDetails}
                     className="w-full py-4 text-lg shadow-primary/25 hover:shadow-primary/40"
                   >
-                    Confirm & Reserve My Item
+                    Confirm & Proceed to Payment
                   </Button>
                 ) : (
-                  /* STEP 2: LOCKER BUTTON (Must be direct click) */
                   <Button 
                     type="button" 
-                    onClick={handleTriggerLocker}
-                    className="w-full py-4 text-lg shadow-primary/25 hover:shadow-primary/40 animate-in fade-in zoom-in duration-300"
+                    onClick={handleTriggerPayment}
+                    className="w-full py-4 text-lg shadow-primary/25 hover:shadow-primary/40 animate-in fade-in zoom-in duration-300 bg-green-600 hover:bg-green-500"
                   >
-                    Click Here to Finalize Verification
+                    <CreditCard className="w-5 h-5 mr-2" />
+                    Pay $14.00 Now
                   </Button>
                 )}
                 
                 <div className="mt-4 flex items-start gap-2 text-xs text-gray-500 justify-center text-center">
                   <Lock className="w-3 h-3 mt-0.5 flex-shrink-0" />
                   <p>
-                    This item is reserved under a 100% promotional discount. 
-                    Limited to first 10 confirmed users.
+                    Secure Checkout. Items are reserved for 10 minutes.
                   </p>
                 </div>
               </div>

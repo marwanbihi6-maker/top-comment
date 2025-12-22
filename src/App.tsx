@@ -57,24 +57,8 @@ export default function App() {
   };
 
   const handleConfirmOrder = (details: any) => {
-    const savedCount = localStorage.getItem('getmyidea_promo_claims');
-    const currentCount = savedCount ? parseInt(savedCount, 10) : 0;
-    const PROMO_LIMIT = 10;
-
-    if (currentCount >= PROMO_LIMIT) {
-      alert("We are sorry! The last item was just claimed by another user while you were filling out the form.");
-      setView('home');
-      setSelectedProduct(null);
-      return;
-    }
-
-    const newCount = currentCount + 1;
-    localStorage.setItem('getmyidea_promo_claims', newCount.toString());
-
-    alert(`🎉 Success! Your item "${selectedProduct.name}" has been reserved! We will ship it to ${details.fullName}.`);
-    
-    setView('home');
-    setSelectedProduct(null);
+    // This function is still passed but the actual redirect logic is in CheckoutPage now
+    alert(`Success! Proceeding to payment for "${selectedProduct.name}".`);
   };
 
   const handleGoToHome = () => {

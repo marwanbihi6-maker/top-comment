@@ -3,12 +3,12 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { ChevronDown, Filter, X, ShoppingBag, AlertCircle, ArrowUpDown, Sparkles, Zap, Timer, LayoutGrid } from 'lucide-react';
 import { CategoryType } from '../App';
 
-// Product Data - Enhanced with more metadata for a premium feel
+// Product Data - Updated with fixed $14 price
 const products = [
   {
     id: 1,
     name: 'National Lampoon - Classy - Premium Steers',
-    price: 0.00,
+    price: 14.00,
     originalPrice: 200.00,
     category: 'T-Shirt' as CategoryType,
     image: 'https://i.postimg.cc/HksRgXHr/here-we-are-2026.png',
@@ -20,7 +20,7 @@ const products = [
   {
     id: 2,
     name: 'Neon Genesis - Streetwear Hoodie (Deep Purple)',
-    price: 0.00,
+    price: 14.00,
     originalPrice: 450.00,
     category: 'Hoodie' as CategoryType,
     image: 'https://i.postimg.cc/X7hMG0Fh/here-we-are-2026-(1).png',
@@ -32,7 +32,7 @@ const products = [
   {
     id: 3,
     name: 'LeDragon - Signature Heavyweight Tee',
-    price: 0.00,
+    price: 14.00,
     originalPrice: 48.00,
     category: 'T-Shirt' as CategoryType,
     image: 'https://i.postimg.cc/0ywLWLY3/here-we-are-2026-(2).png',
@@ -44,7 +44,7 @@ const products = [
   {
     id: 4,
     name: 'GIVEAWAY - RED FLUFFY STREETWEAR',
-    price: 0.00,
+    price: 14.00,
     originalPrice: 95.00,
     category: 'Hoodie' as CategoryType,
     image: 'https://i.postimg.cc/hvZR6L82/here-we-are-2026-(6).png',
@@ -56,7 +56,7 @@ const products = [
   {
     id: 5,
     name: 'Cyberpunk District Hoodie v2.0',
-    price: 0.00,
+    price: 14.00,
     originalPrice: 85.00,
     category: 'Hoodie' as CategoryType,
     image: 'https://i.postimg.cc/FzHV13tJ/here-we-are-2026-(5).png',
@@ -68,7 +68,7 @@ const products = [
   {
     id: 6,
     name: 'Jesus is King - Minimalist Comfort Tee',
-    price: 0.00,
+    price: 14.00,
     originalPrice: 88.00,
     category: 'Hoodie' as CategoryType,
     image: 'https://i.postimg.cc/GtMwsFHg/here-we-are-2026-(4).png',
@@ -117,7 +117,7 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
 
   const handleClaim = (product: any) => {
     if (isPromoFullyClaimed) {
-      alert("Sorry, the 100% discount offer has just ended.");
+      alert("Sorry, the special promotional offer has just ended.");
       return;
     }
     onClaimProduct(product);
@@ -127,13 +127,10 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
     <div className="bg-gray-950 pt-20">
       {/* 1. HERO SECTION */}
       <section className="relative overflow-hidden border-b border-white/5 bg-gray-950 py-12 lg:py-0">
-        {/* Animated Background Elements */}
         <div className="absolute top-1/4 -left-20 w-96 h-96 bg-primary/10 blur-[120px] rounded-full animate-pulse"></div>
         <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-brandPurple/10 blur-[120px] rounded-full animate-pulse delay-700"></div>
 
-        {/* Desktop Hero Content */}
         <div className="hidden lg:grid grid-cols-2 min-h-[650px] max-w-[1600px] mx-auto px-12">
-          {/* Left Text Block */}
           <div className="flex flex-col justify-center z-10 text-white py-24">
             <div className="flex items-center gap-3 mb-8">
               <span className="h-[3px] w-12 bg-primary"></span>
@@ -155,7 +152,7 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
                  </div>
                  <div className="flex flex-col">
                    <span className="text-[10px] font-bold uppercase tracking-widest text-gray-300 leading-tight">Exclusive Benefit</span>
-                   <span className="text-primary text-sm font-extrabold tracking-tight">100% Off for Early Access</span>
+                   <span className="text-primary text-sm font-extrabold tracking-tight">Special $14 Price for Early Access</span>
                  </div>
               </div>
 
@@ -172,22 +169,18 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
             </div>
           </div>
           
-          {/* Right Visual Section (Floating Composition) */}
           <div className="relative h-full flex items-center justify-center overflow-visible">
             <div className="relative w-full aspect-square max-w-[600px] flex items-center justify-center">
-              {/* Back Item Left */}
               <div className="absolute left-[0%] top-[15%] w-[45%] z-10 transition-all duration-700 hover:scale-105 hover:-translate-y-2 opacity-60" 
                    style={{ transform: 'rotate(-12deg)' }}>
                 <img src="https://i.postimg.cc/X7hMG0Fh/here-we-are-2026-(1).png" alt="Product" className="w-full drop-shadow-[0_20px_40px_rgba(0,0,0,0.8)] rounded-3xl" />
               </div>
               
-              {/* Back Item Right */}
               <div className="absolute right-[0%] bottom-[15%] w-[45%] z-10 transition-all duration-700 hover:scale-105 hover:-translate-y-2 opacity-60" 
                    style={{ transform: 'rotate(12deg)' }}>
                 <img src="https://i.postimg.cc/0ywLWLY3/here-we-are-2026-(2).png" alt="Product" className="w-full drop-shadow-[0_20px_40px_rgba(0,0,0,0.8)] rounded-3xl" />
               </div>
 
-              {/* Center Main Hero */}
               <div className="absolute w-[65%] z-20 animate-float">
                 <div className="relative group">
                   <div className="absolute inset-0 bg-primary/20 blur-[80px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
@@ -202,7 +195,6 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
           </div>
         </div>
 
-        {/* Mobile / Tablet Hero */}
         <div className="block lg:hidden px-6">
           <div className="w-full flex flex-col items-center">
              <div className="relative w-full max-w-[340px] mb-12">
@@ -222,7 +214,7 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
                   GEAR <span className="text-primary">SHOP</span>
                 </h1>
                 <p className="text-sm font-medium text-gray-400 mb-8 max-w-sm mx-auto leading-relaxed">
-                  Limited series apparel designed by our community. Claim your 100% discount before they're gone.
+                  Limited series apparel designed by our community. Claim your exclusive $14 price before they're gone.
                 </p>
                 <div className="inline-flex items-center gap-3 bg-white/5 border border-white/10 px-6 py-3 rounded-full backdrop-blur-md mb-8">
                   <Timer className="w-4 h-4 text-primary" />
@@ -235,14 +227,10 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
         </div>
       </section>
 
-      {/* 2. MAIN SHOP CONTENT */}
       <section className="max-w-[1600px] mx-auto px-4 md:px-12 py-16 lg:py-32">
         <div className="flex flex-col lg:flex-row gap-20">
-          
-          {/* SIDEBAR - DESKTOP */}
           <aside className="hidden lg:block w-[280px] shrink-0 sticky top-32 h-fit">
             <div className="space-y-16">
-              {/* Category Filter */}
               <div className="space-y-8">
                 <div className="flex items-center justify-between">
                   <h3 className="text-[11px] font-bold uppercase tracking-[0.4em] text-primary">Browse</h3>
@@ -262,7 +250,6 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
                 </div>
               </div>
               
-              {/* Claim Status Tool */}
               <div className="pt-10 border-t border-white/5">
                 <div className="bg-gradient-to-br from-gray-900 to-gray-950 rounded-[24px] p-8 border border-white/5 shadow-2xl relative overflow-hidden group">
                    <div className="absolute top-0 right-0 p-2 opacity-10 group-hover:opacity-20 transition-opacity">
@@ -289,9 +276,7 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
             </div>
           </aside>
 
-          {/* PRODUCTS AREA */}
           <div className="flex-1">
-            {/* Toolbar */}
             <div className="flex flex-col md:flex-row items-center justify-between mb-16 gap-8">
               <div className="flex flex-col md:flex-row items-center gap-6">
                 <h2 className="text-3xl lg:text-5xl font-black uppercase tracking-tight text-white italic">
@@ -304,7 +289,6 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
               </div>
 
               <div className="flex items-center gap-4 w-full md:w-auto">
-                {/* Mobile Filter Toggle */}
                 <button 
                   onClick={() => setIsFilterMobileOpen(true)}
                   className="flex-1 lg:hidden flex items-center justify-center gap-3 bg-white text-black px-6 py-4 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-primary hover:text-white transition-all shadow-xl"
@@ -312,7 +296,6 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
                   <Filter className="w-4 h-4" /> Filter / Sort
                 </button>
 
-                {/* Desktop Sorting */}
                 <div className="hidden lg:flex items-center gap-5">
                   <div className="flex items-center gap-2 text-gray-500">
                     <ArrowUpDown className="w-4 h-4" />
@@ -332,7 +315,6 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
               </div>
             </div>
 
-            {/* PRODUCT GRID */}
             {filteredAndSortedProducts.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-y-20 gap-x-10">
                 {filteredAndSortedProducts.map(product => {
@@ -340,13 +322,9 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
                   
                   return (
                     <div key={product.id} className="group flex flex-col h-full relative">
-                      {/* Product Card Container */}
                       <div className="relative aspect-[4/5] bg-white rounded-[32px] overflow-hidden transition-all duration-500 md:group-hover:-translate-y-3 md:group-hover:shadow-[0_40px_80px_rgba(0,0,0,0.5)] border border-white/5 flex flex-col items-center justify-center">
-                        
-                        {/* Decorative background circle */}
                         <div className="absolute inset-0 bg-gray-50 opacity-0 md:group-hover:opacity-100 transition-opacity duration-500"></div>
 
-                        {/* Top Badges */}
                         <div className="absolute top-6 left-6 right-6 z-10 flex flex-wrap gap-2 pointer-events-none">
                            <div className={`px-4 py-2 text-[9px] font-extrabold uppercase tracking-widest text-white rounded-lg shadow-lg ${limitReached ? 'bg-gray-800' : product.tagColor}`}>
                              {limitReached ? 'Fully Claimed' : product.badge}
@@ -358,7 +336,6 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
                            )}
                         </div>
 
-                        {/* Image Container */}
                         <div className="w-[85%] h-[85%] flex items-center justify-center p-6">
                            <img 
                              src={product.image} 
@@ -367,7 +344,6 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
                            />
                         </div>
 
-                        {/* Quick View Overlay (Desktop) */}
                         <div className="absolute inset-0 bg-black/5 lg:opacity-0 lg:group-hover:opacity-100 transition-all duration-500 flex items-center justify-center p-8">
                            {!limitReached ? (
                              <button 
@@ -386,7 +362,6 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
                         </div>
                       </div>
 
-                      {/* Product Info */}
                       <div className="mt-8 space-y-4 px-2">
                         <div className="flex items-start justify-between">
                            <div className="flex flex-col gap-1.5">
@@ -398,14 +373,13 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
                            <div className="text-right flex flex-col items-end">
                              <div className="flex items-center gap-3">
                                <span className="text-xs md:text-sm line-through text-gray-600 font-medium tracking-tight">${product.originalPrice.toFixed(0)}</span>
-                               <span className="text-2xl md:text-3xl font-black text-primary leading-none">FREE</span>
+                               <span className="text-2xl md:text-3xl font-black text-primary leading-none">$14</span>
                              </div>
-                             <span className="text-[8px] font-bold text-gray-500 uppercase tracking-widest mt-2">100% Promo Applied</span>
+                             <span className="text-[8px] font-bold text-gray-500 uppercase tracking-widest mt-2">Special Promo Applied</span>
                            </div>
                         </div>
                       </div>
 
-                      {/* Claim Button (Mobile Primary Action) */}
                       <button 
                         onClick={() => handleClaim(product)}
                         disabled={limitReached}
@@ -438,13 +412,11 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
         </div>
       </section>
 
-      {/* MOBILE FILTER OVERLAY */}
       {isFilterMobileOpen && (
         <div className="fixed inset-0 z-[100] lg:hidden">
           <div className="absolute inset-0 bg-black/95 backdrop-blur-2xl" onClick={() => setIsFilterMobileOpen(false)} />
           <div className="absolute bottom-0 left-0 right-0 bg-gray-950 rounded-t-[48px] p-10 flex flex-col shadow-2xl animate-in slide-in-from-bottom duration-500 max-h-[85vh] border-t border-white/10">
              <div className="w-16 h-1.5 bg-gray-800 rounded-full self-center mb-10 shadow-inner"></div>
-             
              <div className="flex items-center justify-between mb-12">
                <div>
                  <h2 className="text-3xl font-black uppercase text-white tracking-tighter">REFINE</h2>
@@ -454,9 +426,7 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
                  <X className="w-6 h-6" />
                </button>
              </div>
-             
              <div className="space-y-12 overflow-y-auto no-scrollbar pb-10">
-               {/* Categories */}
                <div className="space-y-6">
                  <h3 className="text-[10px] font-bold uppercase tracking-[0.4em] text-primary">By Category</h3>
                  <div className="flex flex-col gap-3">
@@ -472,8 +442,6 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
                    ))}
                  </div>
                </div>
-               
-               {/* Sort Order */}
                <div className="space-y-6">
                  <h3 className="text-[10px] font-bold uppercase tracking-[0.4em] text-primary">Display Order</h3>
                  <div className="grid grid-cols-2 gap-4">
@@ -498,7 +466,6 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
         </div>
       )}
 
-      {/* Styles for animation */}
       <style>{`
         @keyframes float {
           0% { transform: translateY(0px) rotate(0deg); }

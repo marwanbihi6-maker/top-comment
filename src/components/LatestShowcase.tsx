@@ -13,37 +13,37 @@ const latestProducts: LatestProduct[] = [
   {
     name: 'National Lampoon - Classy - Premium Steers',
     image: 'https://i.postimg.cc/2S2ZF2ks/here-we-are-2026.png',
-    price: 'Notify Me When Available',
+    price: '$14.00',
     tag: 'Pre Order 12/24'
   },
   {
     name: 'National Lampoon - Rust Edition',
     image: 'https://i.postimg.cc/X7hMG0Fh/here-we-are-2026-(1).png',
-    price: 'Notify Me When Available',
+    price: '$14.00',
     tag: 'Pre Order 12/24'
   },
   {
     name: 'National Lampoon - 4 Pack Bundle',
     image: 'https://i.postimg.cc/0ywLWLY3/here-we-are-2026-(2).png',
-    price: 'Notify Me When Available',
+    price: '$14.00',
     tag: 'Pre Order 12/24'
   },
   {
     name: 'Reversed Greenie Meanie',
     image: 'https://i.postimg.cc/GtMwsFHg/here-we-are-2026-(4).png',
-    price: 'Notify Me When Available',
+    price: '$14.00',
     tag: 'Pre Order 12/19'
   },
   {
     name: 'Classic CEC Enamel Pin Set',
     image: 'https://i.postimg.cc/FzHV13tJ/here-we-are-2026-(5).png',
-    price: '$40.00',
+    price: '$14.00',
     tag: 'Pre-Order'
   },
   {
     name: 'Greenie Meanie - Short Hair',
     image: 'https://i.postimg.cc/hvZR6L82/here-we-are-2026-(6).png',
-    price: '$399.00',
+    price: '$14.00',
     tag: 'Low Stock!'
   }
 ];
@@ -72,7 +72,7 @@ export const LatestShowcase: React.FC<LatestShowcaseProps> = ({ onShopNowClick }
             CHECK OUT THE <span className="text-[#A855F7]">LATEST!</span>
           </h2>
           <p className="text-gray-500 text-lg md:text-xl font-medium max-w-2xl mx-auto leading-relaxed">
-            New, limited, and exclusive items are being added regularly so stay tuned!
+            New, limited, and exclusive items are being added regularly for only $14.
           </p>
         </div>
 
@@ -115,7 +115,7 @@ export const LatestShowcase: React.FC<LatestShowcaseProps> = ({ onShopNowClick }
                     <h3 className="text-sm md:text-base font-bold text-gray-800 uppercase tracking-tight mb-2 line-clamp-2 min-h-[2.5rem] px-2">
                       {product.name}
                     </h3>
-                    <p className="text-xs md:text-sm text-gray-400 font-medium italic transition-colors group-hover:text-primary">
+                    <p className="text-xs md:text-sm text-primary font-black transition-colors group-hover:text-primary">
                       {product.price}
                     </p>
                   </div>

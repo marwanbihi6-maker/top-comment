@@ -36,7 +36,7 @@ export const Hero: React.FC<HeroProps> = ({ onShopClick }) => {
             
             <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-[10px] sm:text-sm font-semibold text-primary animate-pulse">
               <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-primary"></span>
-              100% OFF STOREWIDE - LIMITED DROP
+              SPECIAL $14 DROP - LIMITED QUANTITY
             </div>
 
             <h1 className="text-[36px] leading-[40px] sm:text-5xl lg:text-7xl font-extrabold tracking-tight lg:leading-[1.1] text-white">
@@ -49,12 +49,12 @@ export const Hero: React.FC<HeroProps> = ({ onShopClick }) => {
 
             <p className="text-sm sm:text-lg text-gray-300 leading-relaxed max-w-lg">
               Elevate your style with our exclusive collection of print-on-demand streetwear. 
-              High-quality fabrics, unique artist designs, and sustainable production.
+              High-quality fabrics and unique designs, now for a limited time at just $14.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 items-center pt-2 w-full sm:w-auto">
               <Button onClick={onShopClick} size="md" className="group w-full sm:w-auto py-3 text-sm md:px-8 md:py-4 md:text-lg">
-                Shop Now 
+                Shop $14 Drops
                 <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
               </Button>
               <Button onClick={onShopClick} variant="outline" size="md" className="w-full sm:w-auto py-3 text-sm md:px-8 md:py-4 md:text-lg">
