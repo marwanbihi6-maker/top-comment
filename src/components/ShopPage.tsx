@@ -141,41 +141,35 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
           
           {/* MULTI-PRODUCT COMPOSITION - RIGHT SIDE */}
           <div className="relative h-[450px] md:h-auto bg-[#112250] overflow-hidden flex items-center justify-center p-8 lg:p-12">
-            {/* Glow / Ambient background */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-[radial-gradient(circle_at_center,#8A2FFF1a,transparent_70%)] blur-3xl"></div>
-            <div className="absolute inset-0 bg-gradient-to-br from-[#8A2FFF]/10 via-transparent to-[#112250]/40"></div>
-
+            {/* Cleaned background as per requirements: no glow, no shapes */}
+            
             {/* 3D Composition Container */}
-            <div className="relative w-full max-w-2xl h-full flex items-center justify-center [perspective:2000px] animate-in fade-in duration-700 ease-out fill-mode-forwards">
+            <div className="relative w-full max-w-2xl h-full flex items-center justify-center animate-in fade-in duration-700 ease-out fill-mode-forwards">
               
-              {/* Decorative Elements (Rounded Rectangles) */}
-              <div className="absolute w-[70%] h-[70%] bg-white/5 backdrop-blur-[2px] rounded-[40px] transform rotate-[-6deg] border border-white/5"></div>
-              <div className="absolute w-[65%] h-[65%] bg-white/5 backdrop-blur-[1px] rounded-[40px] transform rotate-[12deg] border border-white/5"></div>
-
-              {/* Left Product: Toothless */}
-              <div className="absolute left-[2%] w-[42%] z-10 transition-all duration-500 transform hover:scale-105 -rotate-[15deg] -translate-x-4 opacity-0 animate-in fade-in slide-in-from-left-4 delay-200 fill-mode-forwards">
+              {/* Left Product: Scale 0.95, -10deg Rotation */}
+              <div className="absolute left-[2%] w-[42%] z-10 transition-all duration-500 transform hover:scale-105 -rotate-[10deg] scale-[0.95] opacity-0 animate-in fade-in slide-in-from-left-4 delay-200 fill-mode-forwards">
                 <img 
-                  src="https://i.postimg.cc/0yVYkp6P/toothless.png" 
-                  alt="Toothless Design" 
-                  className="w-full h-auto drop-shadow-[0_15px_30px_rgba(0,0,0,0.5)]"
+                  src="https://i.postimg.cc/cLtgXFBZ/here-we-are-2026-(1).png" 
+                  alt="Premium Product Left" 
+                  className="w-full h-auto drop-shadow-[0_15px_35px_rgba(0,0,0,0.5)]"
                 />
               </div>
 
-              {/* Right Product: Mr Pens */}
-              <div className="absolute right-[2%] w-[42%] z-10 transition-all duration-500 transform hover:scale-105 rotate-[15deg] translate-x-4 opacity-0 animate-in fade-in slide-in-from-right-4 delay-200 fill-mode-forwards">
+              {/* Right Product: Scale 0.95, 10deg Rotation */}
+              <div className="absolute right-[2%] w-[42%] z-10 transition-all duration-500 transform hover:scale-105 rotate-[10deg] scale-[0.95] opacity-0 animate-in fade-in slide-in-from-right-4 delay-200 fill-mode-forwards">
                 <img 
-                  src="https://i.postimg.cc/DyB7H6FN/mr-pens.png" 
-                  alt="Mr Pens Design" 
-                  className="w-full h-auto drop-shadow-[0_15px_30px_rgba(0,0,0,0.5)]"
+                  src="https://i.postimg.cc/s2z8wNCz/here-we-are-2026-(2).png" 
+                  alt="Premium Product Right" 
+                  className="w-full h-auto drop-shadow-[0_15px_35px_rgba(0,0,0,0.5)]"
                 />
               </div>
 
-              {/* Center Product: Here we are 2026 */}
-              <div className="absolute w-[54%] z-20 transition-all duration-500 transform hover:scale-110 opacity-0 animate-in fade-in zoom-in-95 delay-100 fill-mode-forwards">
+              {/* Center Product: Featured - Scale 1.15, 0deg Rotation */}
+              <div className="absolute w-[55%] z-20 transition-all duration-500 transform hover:scale-[1.25] scale-[1.15] opacity-0 animate-in fade-in zoom-in-95 delay-100 fill-mode-forwards">
                 <img 
-                  src="https://i.postimg.cc/YqXmkz8x/here-we-are-2026.png" 
-                  alt="Main Featured Design" 
-                  className="w-full h-auto drop-shadow-[0_25px_60px_rgba(0,0,0,0.7)]"
+                  src="https://i.postimg.cc/gjhQMFj3/here-we-are-2026.png" 
+                  alt="Featured Product Center" 
+                  className="w-full h-auto drop-shadow-[0_25px_65px_rgba(0,0,0,0.7)]"
                 />
               </div>
             </div>
@@ -185,15 +179,15 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
         {/* Mobile Hero */}
         <div className="block md:hidden">
           <div className="w-full bg-[#112250] p-12 flex items-center justify-center relative overflow-hidden">
-            {/* Background Glow */}
-            <div className="absolute inset-0 bg-gradient-to-b from-[#8A2FFF]/20 to-[#112250]"></div>
+            {/* Simple gradient background for mobile */}
+            <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-[#112250]"></div>
             
-            {/* Single Center Item focused for mobile */}
+            {/* Single Center Item focused for mobile, scale 0.9 */}
             <div className="relative z-10 w-full max-w-[280px]">
                <img 
-                 src="https://i.postimg.cc/YqXmkz8x/here-we-are-2026.png" 
+                 src="https://i.postimg.cc/gjhQMFj3/here-we-are-2026.png" 
                  alt="Featured Product" 
-                 className="w-full h-auto drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)] animate-in fade-in slide-in-from-bottom-5 duration-700"
+                 className="w-full h-auto drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)] scale-[0.9] animate-in fade-in slide-in-from-bottom-5 duration-700"
                />
             </div>
           </div>
