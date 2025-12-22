@@ -11,7 +11,7 @@ const products = [
     price: 150.00,
     originalPrice: 200.00,
     category: 'T-Shirt',
-    image: 'https://i.postimg.cc/2S2ZF2ks/here-we-are-2026.png',
+    image: 'https://i.postimg.cc/YqXmkz8x/here-we-are-2026.png',
     badge: 'Pre Order 12/24',
     date: '2024-01-01',
     edition: 'NORMAL EDITION'
@@ -138,23 +138,64 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
                </span>
             </div>
           </div>
-          <div className="relative h-[400px] md:h-auto bg-gray-900 overflow-hidden">
-            <img 
-              src="https://i.postimg.cc/2S2ZF2ks/here-we-are-2026.png" 
-              alt="Hero Product" 
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] h-auto object-contain z-10 drop-shadow-[0_35px_35px_rgba(0,0,0,0.6)]"
-            />
+          
+          {/* MULTI-PRODUCT COMPOSITION - RIGHT SIDE */}
+          <div className="relative h-[450px] md:h-auto bg-[#112250] overflow-hidden flex items-center justify-center p-8 lg:p-12">
+            {/* Glow / Ambient background */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-[radial-gradient(circle_at_center,#8A2FFF1a,transparent_70%)] blur-3xl"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-[#8A2FFF]/10 via-transparent to-[#112250]/40"></div>
+
+            {/* 3D Composition Container */}
+            <div className="relative w-full max-w-2xl h-full flex items-center justify-center [perspective:2000px] animate-in fade-in duration-700 ease-out fill-mode-forwards">
+              
+              {/* Decorative Elements (Rounded Rectangles) */}
+              <div className="absolute w-[70%] h-[70%] bg-white/5 backdrop-blur-[2px] rounded-[40px] transform rotate-[-6deg] border border-white/5"></div>
+              <div className="absolute w-[65%] h-[65%] bg-white/5 backdrop-blur-[1px] rounded-[40px] transform rotate-[12deg] border border-white/5"></div>
+
+              {/* Left Product: Toothless */}
+              <div className="absolute left-[2%] w-[42%] z-10 transition-all duration-500 transform hover:scale-105 -rotate-[15deg] -translate-x-4 opacity-0 animate-in fade-in slide-in-from-left-4 delay-200 fill-mode-forwards">
+                <img 
+                  src="https://i.postimg.cc/0yVYkp6P/toothless.png" 
+                  alt="Toothless Design" 
+                  className="w-full h-auto drop-shadow-[0_15px_30px_rgba(0,0,0,0.5)]"
+                />
+              </div>
+
+              {/* Right Product: Mr Pens */}
+              <div className="absolute right-[2%] w-[42%] z-10 transition-all duration-500 transform hover:scale-105 rotate-[15deg] translate-x-4 opacity-0 animate-in fade-in slide-in-from-right-4 delay-200 fill-mode-forwards">
+                <img 
+                  src="https://i.postimg.cc/DyB7H6FN/mr-pens.png" 
+                  alt="Mr Pens Design" 
+                  className="w-full h-auto drop-shadow-[0_15px_30px_rgba(0,0,0,0.5)]"
+                />
+              </div>
+
+              {/* Center Product: Here we are 2026 */}
+              <div className="absolute w-[54%] z-20 transition-all duration-500 transform hover:scale-110 opacity-0 animate-in fade-in zoom-in-95 delay-100 fill-mode-forwards">
+                <img 
+                  src="https://i.postimg.cc/YqXmkz8x/here-we-are-2026.png" 
+                  alt="Main Featured Design" 
+                  className="w-full h-auto drop-shadow-[0_25px_60px_rgba(0,0,0,0.7)]"
+                />
+              </div>
+            </div>
           </div>
         </div>
 
         {/* Mobile Hero */}
         <div className="block md:hidden">
-          <div className="w-full bg-gray-950 p-0 flex justify-center">
-            <img 
-              src="https://i.postimg.cc/2S2ZF2ks/here-we-are-2026.png" 
-              alt="Hero Product" 
-              className="w-full h-auto object-cover"
-            />
+          <div className="w-full bg-[#112250] p-12 flex items-center justify-center relative overflow-hidden">
+            {/* Background Glow */}
+            <div className="absolute inset-0 bg-gradient-to-b from-[#8A2FFF]/20 to-[#112250]"></div>
+            
+            {/* Single Center Item focused for mobile */}
+            <div className="relative z-10 w-full max-w-[280px]">
+               <img 
+                 src="https://i.postimg.cc/YqXmkz8x/here-we-are-2026.png" 
+                 alt="Featured Product" 
+                 className="w-full h-auto drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)] animate-in fade-in slide-in-from-bottom-5 duration-700"
+               />
+            </div>
           </div>
           <div className="bg-[#F5821F] pt-8 pb-10 px-6 text-center text-white rounded-b-[12px] relative">
             <h1 className="text-[28px] font-black uppercase tracking-tighter mb-3 leading-none">
@@ -298,7 +339,7 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
                         </div>
                       </div>
 
-                      {/* Mobile Card Style (Updated to specs) */}
+                      {/* Mobile Card Style */}
                       <div className="flex md:hidden flex-col bg-[#ffffff] border-2 border-[rgba(176,0,255,0.25)] rounded-[16px] p-4 shadow-[0_2px_10px_rgba(0,0,0,0.08)] overflow-hidden relative h-full">
                         {/* Badge top-left */}
                         <div className="absolute top-[10px] left-[10px] z-10">
