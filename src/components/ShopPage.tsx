@@ -121,9 +121,9 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
 
   return (
     <div className="bg-gray-950 pt-20">
-      {/* 1. HERO SECTION (Redesigned for Mobile) */}
+      {/* 1. HERO SECTION */}
       <section className="relative overflow-hidden">
-        {/* Desktop Hero (md and up) */}
+        {/* Desktop Hero */}
         <div className="hidden md:grid grid-cols-2 bg-primary">
           <div className="flex flex-col justify-center p-8 md:p-12 lg:p-24 z-10 text-white">
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-black italic uppercase leading-none mb-6 tracking-tighter">
@@ -144,36 +144,33 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
               alt="Hero Product" 
               className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] h-auto object-contain z-10 drop-shadow-[0_35px_35px_rgba(0,0,0,0.6)]"
             />
-            <div className="absolute inset-0 bg-gradient-to-l from-gray-900 via-transparent to-transparent"></div>
-            <div className="absolute bottom-10 right-10 opacity-20 text-8xl font-black text-white italic select-none">GEAR</div>
           </div>
         </div>
 
-        {/* Mobile Hero (max-md) */}
-        <div className="block md:hidden bg-white">
-          <div className="w-full h-auto bg-gray-950 p-6 flex justify-center">
+        {/* Mobile Hero (Refined to match specs) */}
+        <div className="block md:hidden">
+          <div className="w-full bg-gray-950 p-0 flex justify-center">
             <img 
               src="https://i.postimg.cc/2S2ZF2ks/here-we-are-2026.png" 
               alt="Hero Product" 
-              className="w-full max-w-[300px] h-auto object-contain drop-shadow-[0_10px_20px_rgba(255,255,255,0.1)]"
+              className="w-full h-auto object-cover"
             />
           </div>
-          <div className="bg-[#FF8A00] py-8 px-6 text-center text-white">
-            <h1 className="text-4xl font-black uppercase tracking-tighter mb-4">
-              THE GETMYIDEA GEAR SHOP
+          <div className="bg-[#F5821F] pt-8 pb-10 px-6 text-center text-white rounded-b-[12px] relative">
+            <h1 className="text-[28px] font-black uppercase tracking-tighter mb-3 leading-none">
+              THE BULL AIRS GEAR SHOP
             </h1>
-            <p className="text-sm font-bold leading-relaxed mb-6">
+            <p className="text-[13px] font-bold leading-relaxed mb-6 px-4">
               Limited runs, pre-orders, pop drops and all-time favorites alike will gather here in our online shop! Be sure to check back regularly and subscribe to our site so you don't miss out!
             </p>
-            <div className="flex flex-col items-center justify-center gap-2">
-              <p className="text-[11px] font-black uppercase leading-tight max-w-[280px]">
+            <div className="relative flex flex-col items-center">
+              <p className="text-[10px] font-black uppercase leading-tight max-w-[220px]">
                 DON'T FORGET! CREATE AN ACCOUNT AND LOG IN BEFORE PURCHASE TO CLAIM YOUR 100% DISCOUNT.
               </p>
               <img 
                 src="https://i.postimg.cc/6pxC6V7W/bullbucks.png" 
-                alt="Promo Bucks" 
-                className="w-24 h-auto mt-2" 
-                onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                alt="Illustration" 
+                className="w-20 h-auto absolute -right-2 top-0 opacity-90"
               />
             </div>
           </div>
@@ -202,50 +199,31 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
                   ))}
                 </div>
               </div>
-              <div className="space-y-4">
-                <h3 className="text-xs font-black uppercase tracking-[0.2em] text-primary">Price</h3>
-                <div className="flex flex-col items-start gap-4">
-                  {[
-                    { id: 'all', label: 'All Prices' },
-                    { id: 'under50', label: 'Under $50' },
-                    { id: '50to100', label: '$50 – $100' },
-                    { id: 'over100', label: 'Above $100' }
-                  ].map(p => (
-                    <button 
-                      key={p.id}
-                      onClick={() => setPriceRange(p.id as any)}
-                      className={`text-base font-bold transition-all hover:text-primary ${priceRange === p.id ? 'text-white pl-4 border-l-2 border-primary' : 'text-gray-500'}`}
-                    >
-                      {p.label}
-                    </button>
-                  ))}
-                </div>
-              </div>
             </div>
           </aside>
 
           {/* PRODUCTS AREA */}
           <div className="flex-1">
-            {/* Toolbar (Redesigned for Mobile) */}
-            <div className="flex items-center justify-between mb-8 md:mb-10 pb-6 border-b border-white/10">
+            {/* Toolbar (Mobile-Optimized Filter Bar) */}
+            <div className="mb-8 md:mb-10">
               {/* Mobile Filter View */}
-              <div className="flex md:hidden w-full gap-2">
+              <div className="flex md:hidden w-full gap-0 bg-white shadow-sm overflow-hidden mb-8 mt-4">
                 <button 
                   onClick={() => setIsFilterMobileOpen(true)}
-                  className="flex-1 border-2 border-white rounded-xl py-3 text-center text-xl font-bold uppercase tracking-tight text-white flex items-center justify-center"
+                  className="flex-1 py-4 text-center text-[22px] font-black uppercase tracking-tight text-gray-900 flex items-center justify-center pl-10"
                 >
                   Filter
                 </button>
                 <button 
                   onClick={() => setIsFilterMobileOpen(true)}
-                  className="w-16 border-2 border-white rounded-xl py-3 text-center text-white flex items-center justify-center"
+                  className="w-16 border-l border-gray-100 py-4 text-gray-900 flex items-center justify-center"
                 >
                   <ArrowUpDown className="w-6 h-6" />
                 </button>
               </div>
 
               {/* Desktop Sorting */}
-              <div className="hidden md:flex items-center gap-6 ml-auto">
+              <div className="hidden md:flex items-center gap-6 ml-auto border-b border-white/10 pb-6">
                 <div className="relative group">
                   <div className="flex items-center gap-2 cursor-pointer bg-gray-900 px-4 py-2 border border-white/10 rounded-md">
                     <span className="text-xs font-black uppercase tracking-widest text-gray-400">Sort by:</span>
@@ -277,9 +255,9 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
               </div>
             </div>
 
-            {/* PRODUCT GRID (Redesigned for Mobile) */}
+            {/* PRODUCT GRID */}
             {filteredAndSortedProducts.length > 0 ? (
-              <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-x-6 md:gap-y-12">
+              <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-x-6 md:gap-y-12 px-0">
                 {filteredAndSortedProducts.map(product => {
                   const limitReached = isPromoFullyClaimed && product.price === 0;
                   
@@ -308,61 +286,48 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
                                <span className="text-lg md:text-xl font-black text-primary italic">
                                  ${product.price.toFixed(2)}
                                </span>
-                               {product.originalPrice > product.price && (
-                                 <span className="text-xs font-bold text-gray-400 line-through">
-                                   ${product.originalPrice.toFixed(2)}
-                                 </span>
-                               )}
                             </div>
-                            <p className="text-[10px] font-black text-gray-400 tracking-widest uppercase mb-4">
-                              {product.category}
-                            </p>
                             <button 
                               onClick={() => handleClaim(product)}
-                              disabled={limitReached}
-                              className={`w-full py-3 rounded-md text-[10px] font-black tracking-[0.2em] uppercase transition-all shadow-md
-                                ${limitReached 
-                                  ? 'bg-gray-200 text-gray-400 cursor-not-allowed' 
-                                  : 'bg-primary text-white hover:bg-brandPurple active:scale-95'}`}
+                              className="w-full py-3 bg-primary text-white text-[10px] font-black uppercase rounded-md"
                             >
-                              {limitReached ? 'Offer Ended' : (product.price === 0 ? 'Claim 100% OFF' : 'Add to Bag')}
+                              Claim Now
                             </button>
                           </div>
                         </div>
                       </div>
 
-                      {/* Mobile Card Style (matching BullAirs Screenshot) */}
-                      <div className="flex md:hidden flex-col bg-white border-[4px] border-[#A020F0] rounded-sm overflow-hidden relative min-h-[380px]">
-                        {/* Badge full width at top */}
-                        <div className="w-full bg-[#C1272D] text-white py-2 text-[10px] font-black uppercase text-center tracking-tighter">
-                          {product.badge}
+                      {/* Mobile Card Style (Updated to spec) */}
+                      <div className="flex md:hidden flex-col bg-white border-[1px] border-[#B700FF] rounded-[14px] overflow-hidden relative h-full">
+                        {/* Badge top-left */}
+                        <div className="absolute top-0 left-0 z-10">
+                          <div className="bg-[#C92A2A] text-white py-1.5 px-3 text-[10px] font-black uppercase leading-none rounded-br-sm shadow-md">
+                            {product.badge}
+                          </div>
                         </div>
                         
-                        <div className="flex-1 flex items-center justify-center p-4">
+                        <div className="flex-1 flex items-center justify-center p-4 min-h-[160px]">
                           <img 
                             src={product.image} 
                             alt={product.name} 
-                            className="w-full h-32 object-contain"
+                            className="w-full h-full object-contain max-h-[130px]"
                           />
                         </div>
 
-                        <div className="p-3 text-center space-y-2">
-                          {product.edition && (
-                            <p className="text-[9px] font-black text-gray-900 uppercase tracking-tighter">
-                              {product.edition}
-                            </p>
-                          )}
-                          <h3 className="text-[11px] font-black text-gray-900 uppercase leading-none min-h-[2rem]">
+                        <div className="p-3 text-center flex flex-col items-center">
+                          <h3 className="text-[11px] font-black text-gray-900 uppercase leading-tight min-h-[2rem] line-clamp-2 mb-2">
                             {product.name}
                           </h3>
-                          <p className="text-lg font-black text-[#80FF00] italic leading-none pt-1">
+                          <p className="text-[18px] font-black text-[#68C100] italic leading-none mb-3">
                             ${product.price.toFixed(2)}
                           </p>
                           <button 
                             onClick={() => handleClaim(product)}
                             disabled={limitReached}
-                            className={`w-full py-2.5 bg-[#CCCCCC] text-white text-[12px] font-bold uppercase rounded-sm mt-2
-                              ${limitReached ? 'opacity-50' : 'hover:bg-primary'}`}
+                            className={`w-full py-2.5 rounded-[8px] text-[12px] font-black uppercase transition-all
+                              ${limitReached 
+                                ? 'bg-[#E0E0E0] text-gray-500 border border-gray-300' 
+                                : 'bg-[#C1272D] text-white hover:bg-primary active:scale-95'}`}
                           >
                             {limitReached ? 'Unavailable' : 'Claim Now'}
                           </button>
@@ -376,13 +341,6 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
               <div className="text-center py-40 bg-gray-900/40 rounded-3xl border border-white/5">
                 <AlertCircle className="w-12 h-12 text-gray-700 mx-auto mb-4" />
                 <h4 className="text-xl font-black uppercase italic tracking-tighter text-gray-500">Nothing found</h4>
-                <p className="text-gray-600 mt-2">Try adjusting your filters.</p>
-                <button 
-                  onClick={() => { setSelectedCategory('all'); setPriceRange('all'); }}
-                  className="mt-6 text-primary font-black uppercase tracking-widest text-xs hover:underline"
-                >
-                  Reset Filters
-                </button>
               </div>
             )}
           </div>
@@ -415,33 +373,6 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
                    ))}
                  </div>
                </div>
-               <div className="space-y-6">
-                 <h3 className="text-xs font-black uppercase tracking-[0.2em] text-primary">Price</h3>
-                 <div className="flex flex-col items-start gap-4">
-                   {[
-                     { id: 'all', label: 'All Prices' },
-                     { id: 'under50', label: 'Under $50' },
-                     { id: '50to100', label: '$50 – $100' },
-                     { id: 'over100', label: 'Above $100' }
-                   ].map(p => (
-                     <button 
-                       key={p.id}
-                       onClick={() => { setPriceRange(p.id as any); setIsFilterMobileOpen(false); }}
-                       className={`text-lg font-bold transition-all ${priceRange === p.id ? 'text-primary' : 'text-gray-400'}`}
-                     >
-                       {p.label}
-                     </button>
-                   ))}
-                 </div>
-               </div>
-             </div>
-             <div className="mt-auto">
-               <button 
-                onClick={() => setIsFilterMobileOpen(false)}
-                className="w-full py-4 bg-primary text-white font-black uppercase tracking-widest rounded-md"
-               >
-                 View Results
-               </button>
              </div>
           </div>
         </div>
