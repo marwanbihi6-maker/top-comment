@@ -44,7 +44,7 @@ const products = [
     originalPrice: 95.00,
     category: 'Hoodie',
     image: 'https://i.postimg.cc/hvZR6L82/here-we-are-2026-(6).png',
-    badge: 'Pre Order 12/19',
+    badge: 'Low Stock!',
     date: '2024-01-10'
   },
   {
@@ -147,7 +147,7 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
           </div>
         </div>
 
-        {/* Mobile Hero (Refined to match specs) */}
+        {/* Mobile Hero */}
         <div className="block md:hidden">
           <div className="w-full bg-gray-950 p-0 flex justify-center">
             <img 
@@ -205,7 +205,7 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
           {/* PRODUCTS AREA */}
           <div className="flex-1">
             {/* Toolbar (Mobile-Optimized Filter Bar) */}
-            <div className="mb-8 md:mb-10">
+            <div className="mb-0">
               {/* Mobile Filter View */}
               <div className="flex md:hidden w-full gap-0 bg-white shadow-sm overflow-hidden mb-8 mt-4">
                 <button 
@@ -223,7 +223,7 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
               </div>
 
               {/* Desktop Sorting */}
-              <div className="hidden md:flex items-center gap-6 ml-auto border-b border-white/10 pb-6">
+              <div className="hidden md:flex items-center gap-6 ml-auto border-b border-white/10 pb-6 mb-10">
                 <div className="relative group">
                   <div className="flex items-center gap-2 cursor-pointer bg-gray-900 px-4 py-2 border border-white/10 rounded-md">
                     <span className="text-xs font-black uppercase tracking-widest text-gray-400">Sort by:</span>
@@ -257,9 +257,10 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
 
             {/* PRODUCT GRID */}
             {filteredAndSortedProducts.length > 0 ? (
-              <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-x-6 md:gap-y-12 px-0">
+              <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-[22px] md:gap-x-6 md:gap-y-12 px-[14px] md:px-0 mt-5 md:mt-0">
                 {filteredAndSortedProducts.map(product => {
                   const limitReached = isPromoFullyClaimed && product.price === 0;
+                  const isPurpleBadge = product.badge.toLowerCase().includes('low') || product.badge.toLowerCase().includes('pre');
                   
                   return (
                     <React.Fragment key={product.id}>
@@ -297,37 +298,38 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
                         </div>
                       </div>
 
-                      {/* Mobile Card Style (Updated to spec) */}
-                      <div className="flex md:hidden flex-col bg-white border-[1px] border-[#B700FF] rounded-[14px] overflow-hidden relative h-full">
+                      {/* Mobile Card Style (Updated to specs) */}
+                      <div className="flex md:hidden flex-col bg-[#ffffff] border-2 border-[rgba(176,0,255,0.25)] rounded-[16px] p-4 shadow-[0_2px_10px_rgba(0,0,0,0.08)] overflow-hidden relative h-full">
                         {/* Badge top-left */}
-                        <div className="absolute top-0 left-0 z-10">
-                          <div className="bg-[#C92A2A] text-white py-1.5 px-3 text-[10px] font-black uppercase leading-none rounded-br-sm shadow-md">
-                            {product.badge}
+                        <div className="absolute top-[10px] left-[10px] z-10">
+                          <div className={`py-1 px-2.5 text-[10px] font-semibold uppercase leading-none rounded-[8px] shadow-[0_1px_3px_rgba(0,0,0,0.12)] text-white 
+                            ${isPurpleBadge ? 'bg-[#B000FF]' : 'bg-[#E53935]'}`}>
+                            {limitReached ? 'Claimed' : product.badge}
                           </div>
                         </div>
                         
-                        <div className="flex-1 flex items-center justify-center p-4 min-h-[160px]">
+                        <div className="flex-1 flex items-center justify-center mb-2.5">
                           <img 
                             src={product.image} 
                             alt={product.name} 
-                            className="w-full h-full object-contain max-h-[130px]"
+                            className="w-full max-h-[160px] object-contain"
                           />
                         </div>
 
-                        <div className="p-3 text-center flex flex-col items-center">
-                          <h3 className="text-[11px] font-black text-gray-900 uppercase leading-tight min-h-[2rem] line-clamp-2 mb-2">
+                        <div className="text-center flex flex-col items-center">
+                          <h3 className="text-[13px] font-semibold text-gray-900 leading-[1.4] line-clamp-2 min-h-[2.6rem] uppercase">
                             {product.name}
                           </h3>
-                          <p className="text-[18px] font-black text-[#68C100] italic leading-none mb-3">
+                          <p className="text-[15px] font-bold text-[#A3FF00] mt-1.5 mb-2.5">
                             ${product.price.toFixed(2)}
                           </p>
                           <button 
                             onClick={() => handleClaim(product)}
                             disabled={limitReached}
-                            className={`w-full py-2.5 rounded-[8px] text-[12px] font-black uppercase transition-all
+                            className={`w-full py-3 rounded-[12px] text-[13px] font-semibold uppercase transition-all shadow-[0_4px_8px_rgba(0,0,0,0.12)]
                               ${limitReached 
-                                ? 'bg-[#E0E0E0] text-gray-500 border border-gray-300' 
-                                : 'bg-[#C1272D] text-white hover:bg-primary active:scale-95'}`}
+                                ? 'bg-gray-200 text-gray-500 cursor-not-allowed' 
+                                : 'bg-[#D32F2F] text-white active:scale-95'}`}
                           >
                             {limitReached ? 'Unavailable' : 'Claim Now'}
                           </button>
