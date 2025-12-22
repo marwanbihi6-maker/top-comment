@@ -391,7 +391,7 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
                         <div className="flex items-start justify-between">
                            <div className="flex flex-col gap-1.5">
                              <span className="text-[10px] md:text-xs font-bold text-primary uppercase tracking-[0.2em]">{product.category}</span>
-                             <h3 className="text-xl md:text-2xl font-extrabold text-white uppercase leading-tight tracking-tight line-clamp-2">
+                             <h3 className="text-xl md:text-2xl font-black text-white uppercase leading-none tracking-tighter line-clamp-2">
                                {product.name}
                              </h3>
                            </div>
