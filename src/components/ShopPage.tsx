@@ -11,7 +11,7 @@ const products = [
     price: 0.00,
     originalPrice: 200.00,
     category: 'T-Shirt' as CategoryType,
-    image: 'https://i.postimg.cc/YqXmkz8x/here-we-are-2026.png',
+    image: 'https://i.postimg.cc/HksRgXHr/here-we-are-2026.png',
     badge: 'Limited Drop',
     date: '2024-12-24',
     edition: 'ARTIST EDITION',
@@ -192,7 +192,7 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
                 <div className="relative group">
                   <div className="absolute inset-0 bg-primary/20 blur-[80px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
                   <img 
-                    src="https://i.postimg.cc/YqXmkz8x/here-we-are-2026.png" 
+                    src="https://i.postimg.cc/HksRgXHr/here-we-are-2026.png" 
                     alt="Main Product"
                     className="w-full h-auto drop-shadow-[0_40px_80px_rgba(0,0,0,0.9)] relative z-10 transition-transform duration-500 group-hover:scale-105"
                   />
@@ -208,7 +208,7 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
              <div className="relative w-full max-w-[340px] mb-12">
                <div className="absolute inset-0 bg-primary/10 blur-[60px] rounded-full"></div>
                <img 
-                 src="https://i.postimg.cc/YqXmkz8x/here-we-are-2026.png" 
+                 src="https://i.postimg.cc/HksRgXHr/here-we-are-2026.png" 
                  alt="Featured Product" 
                  className="w-full h-auto drop-shadow-[0_25px_50px_rgba(0,0,0,0.7)] relative z-10" 
                />
