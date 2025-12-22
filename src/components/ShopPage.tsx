@@ -206,7 +206,7 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
       </section>
 
       {/* 2. MAIN SHOP CONTENT */}
-      <section className="max-w-[1600px] mx-auto px-6 py-12 lg:py-24">
+      <section className="max-w-[1600px] mx-auto px-4 md:px-6 py-12 lg:py-24">
         <div className="flex flex-col lg:flex-row gap-16">
           
           {/* SIDEBAR - DESKTOP */}
@@ -251,7 +251,7 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
           {/* PRODUCTS AREA */}
           <div className="flex-1">
             {/* Toolbar */}
-            <div className="flex items-center justify-between mb-12 border-b border-white/5 pb-8">
+            <div className="mt-8 md:mt-0 flex items-center justify-between mb-12 border-b border-white/5 pb-8">
               <div className="flex items-center gap-4">
                 <h2 className="text-2xl lg:text-4xl font-black uppercase tracking-tight text-white italic">
                   Latest <span className="text-primary">Drops</span>
@@ -287,38 +287,38 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
 
             {/* PRODUCT GRID */}
             {filteredAndSortedProducts.length > 0 ? (
-              <div className="grid grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6 lg:gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-y-12 gap-x-6 md:gap-x-8">
                 {filteredAndSortedProducts.map(product => {
                   const limitReached = isPromoFullyClaimed;
                   
                   return (
-                    <div key={product.id} className="group flex flex-col h-full relative">
+                    <div key={product.id} className="group flex flex-col h-full relative mb-6">
                       {/* Product Card Container */}
-                      <div className="relative aspect-[4/5] bg-white rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(255,63,142,0.1)] border border-white/5">
+                      <div className="relative aspect-square bg-white rounded-2xl overflow-hidden transition-all duration-500 md:hover:-translate-y-2 md:hover:shadow-[0_20px_40px_rgba(255,63,142,0.1)] border border-white/5 flex flex-col items-center justify-center">
                         
-                        {/* Tags & Badges */}
-                        <div className="absolute top-4 left-4 z-10 flex flex-col gap-2">
-                           <div className={`px-3 py-1.5 text-[10px] font-black uppercase tracking-widest text-white rounded-lg shadow-lg ${limitReached ? 'bg-gray-800' : 'bg-primary'}`}>
+                        {/* Tags & Badges - Centered on Mobile */}
+                        <div className="absolute top-4 left-0 right-0 z-10 flex flex-col items-center gap-2 px-4 pointer-events-none md:items-start md:left-4 md:right-auto">
+                           <div className={`px-4 py-2 text-[10px] font-black uppercase tracking-widest text-white rounded-lg shadow-lg ${limitReached ? 'bg-gray-800' : 'bg-primary'}`}>
                              {limitReached ? 'Sold Out' : product.badge}
                            </div>
                            {product.edition && (
-                             <div className="px-3 py-1.5 text-[9px] font-bold uppercase tracking-widest text-black bg-white/90 backdrop-blur-md rounded-lg shadow-md border border-gray-200">
+                             <div className="px-4 py-2 text-[9px] font-bold uppercase tracking-widest text-black bg-white/90 backdrop-blur-md rounded-lg shadow-md border border-gray-200">
                                {product.edition}
                              </div>
                            )}
                         </div>
 
-                        {/* Image */}
-                        <div className="w-full h-full flex items-center justify-center p-8 lg:p-12">
+                        {/* Image - 80% width and centered on mobile */}
+                        <div className="w-[80%] h-[80%] flex items-center justify-center p-4">
                            <img 
                              src={product.image} 
                              alt={product.name} 
-                             className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110"
+                             className="w-full h-full object-contain transition-transform duration-700 md:group-hover:scale-110"
                            />
                         </div>
 
-                        {/* Hover Quick Action */}
-                        <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        {/* Hover Quick Action - Hidden on mobile */}
+                        <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden md:flex items-center justify-center">
                            {!limitReached && (
                              <button 
                                onClick={() => handleClaim(product)}
@@ -331,24 +331,24 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onClaimProduct, initialCateg
                       </div>
 
                       {/* Product Info */}
-                      <div className="mt-6 space-y-2">
+                      <div className="mt-6 space-y-3 px-2">
                         <div className="flex items-center justify-between">
                            <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">{product.category}</span>
                            <div className="flex items-center gap-2">
                              <span className="text-sm line-through text-gray-600 font-medium">${product.originalPrice.toFixed(0)}</span>
-                             <span className="text-lg font-black text-primary italic">FREE</span>
+                             <span className="text-xl font-black text-primary italic">FREE</span>
                            </div>
                         </div>
-                        <h3 className="text-base lg:text-lg font-black text-white uppercase leading-tight tracking-tight line-clamp-2">
+                        <h3 className="text-base lg:text-lg font-black text-white uppercase leading-tight tracking-tight line-clamp-2 md:text-left text-center">
                           {product.name}
                         </h3>
                       </div>
 
-                      {/* Mobile Only Button */}
+                      {/* Claim Button - Full width 100% on mobile */}
                       <button 
                         onClick={() => handleClaim(product)}
                         disabled={limitReached}
-                        className={`mt-4 lg:hidden w-full py-4 rounded-xl text-xs font-black uppercase tracking-widest transition-all ${limitReached ? 'bg-gray-800 text-gray-500 cursor-not-allowed' : 'bg-primary text-white active:scale-95 shadow-lg shadow-primary/20'}`}
+                        className={`mt-6 w-full py-5 rounded-xl text-xs font-black uppercase tracking-widest transition-all ${limitReached ? 'bg-gray-800 text-gray-500 cursor-not-allowed' : 'bg-primary text-white active:scale-95 shadow-lg shadow-primary/20'}`}
                       >
                         {limitReached ? 'Unavailable' : 'Claim Now'}
                       </button>
